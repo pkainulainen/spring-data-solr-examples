@@ -92,21 +92,21 @@
                                 <resource>
                                     <directory>${project.basedir}/src/main/resources</directory>
                                     <filtering>true</filtering>
-                                    <targetPath>${solr.home.directory}</targetPath>
+                                    <targetPath>${solr.solr.home}</targetPath>
                                     <includes>
                                         <include>solr.xml</include>
                                     </includes>
                                 </resource>
                                 <resource>
                                     <directory>${project.basedir}/src/main/config</directory>
-                                    <targetPath>${solr.home.directory}/${solr.default.core.directory}/conf</targetPath>
+                                    <targetPath>${solr.solr.home}/${solr.default.core.directory}/conf</targetPath>
                                     <excludes>
                                         <exclude>lang</exclude>
                                     </excludes>
                                 </resource>
                                 <resource>
                                     <directory>${project.basedir}/src/main/config/lang</directory>
-                                    <targetPath>${solr.home.directory}/${solr.default.core.directory}/conf/lang</targetPath>
+                                    <targetPath>${solr.solr.home}/${solr.default.core.directory}/conf/lang</targetPath>
                                 </resource>
                             </resources>
                         </configuration>
@@ -130,7 +130,7 @@
                                 </resource>
                                 <resource>
                                     <clean>true</clean>
-                                    <directory>${solr.home.directory}</directory>
+                                    <directory>${solr.solr.home}</directory>
                                     <includes>
                                         <include>solr.xml</include>
                                     </includes>
@@ -138,7 +138,7 @@
                                 <resource>
                                     <clean>true</clean>
                                     <cleanEmptyDirectories>true</cleanEmptyDirectories>
-                                    <directory>${solr.home.directory}/${solr.default.core.directory}</directory>
+                                    <directory>${solr.solr.home}/${solr.default.core.directory}</directory>
                                     <includes>
                                         <include>solr.xml</include>
                                         <include>conf</include>
@@ -158,16 +158,11 @@
                     <stopKey>stop</stopKey>
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                            <port>${jetty.http.port}</port>
+                            <port>8983</port>
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
                     </connectors>
-                    <systemProperties>
-                        <systemProperty>
-                            <name>solr.solr.home</name>
-                            <value>${solr.home.directory}</value>
-                        </systemProperty>
-                    </systemProperties>
+                    <systemPropertiesFile>${project.basedir}/profiles/${build.profile.id}/config.properties</systemPropertiesFile>
                     <webApp>
                         <contextPath>/solr</contextPath>
                     </webApp>
