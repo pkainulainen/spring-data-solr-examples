@@ -7,8 +7,14 @@
     <version>0.1</version>
     <name>Todo Solr Example</name>
     <description>
-        This a Maven project that is used...
+        This Maven project is used to run Solr in a development environment.
     </description>
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
     <properties>
         <solr.version>4.0.0</solr.version>
     </properties>
