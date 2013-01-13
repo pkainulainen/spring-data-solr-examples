@@ -17,6 +17,7 @@
     </licenses>
     <properties>
         <solr.version>4.0.0</solr.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <profiles>
         <profile>
@@ -119,6 +120,14 @@
                         <configuration>
                             <failIfNotFound>false</failIfNotFound>
                             <resources>
+                                <resource>
+                                    <clean>true</clean>
+                                    <cleanEmptyDirectories>true</cleanEmptyDirectories>
+                                    <directory>${project.basedir}/overlays</directory>
+                                    <includes>
+                                        <include>**/**</include>
+                                    </includes>
+                                </resource>
                                 <resource>
                                     <clean>true</clean>
                                     <directory>${solr.home.directory}</directory>
