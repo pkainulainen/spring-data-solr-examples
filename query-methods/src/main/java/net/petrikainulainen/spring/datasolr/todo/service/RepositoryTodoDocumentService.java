@@ -23,6 +23,8 @@ public class RepositoryTodoDocumentService implements TodoDocumentService {
     @Override
     public void deleteById(Long id) {
         LOGGER.debug("Deleting an existing document with id: {}", id);
+
+        //Todo: Find out if Spring Data Solr will support id's which are not Strings.
         repository.delete(id);
     }
 
