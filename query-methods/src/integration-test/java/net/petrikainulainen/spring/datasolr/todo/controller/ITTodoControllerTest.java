@@ -73,8 +73,8 @@ public class ITTodoControllerTest {
     public void addAsAnonymous() throws Exception {
         TodoDTO added = TodoTestUtil.createDTO(null, "description", "title");
         mockMvc.perform(post("/api/todo")
-                .contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8)
-                .content(IntegrationTestUtil.convertObjectToJsonBytes(added))
+                .contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8)
+                .content(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.convertObjectToJsonBytes(added))
         )
                 .andExpect(status().isUnauthorized());
     }
@@ -84,12 +84,12 @@ public class ITTodoControllerTest {
     public void addAsUser() throws Exception {
         TodoDTO added = TodoTestUtil.createDTO(null, "description", "title");
         mockMvc.perform(post("/api/todo")
-                .contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8)
-                .content(IntegrationTestUtil.convertObjectToJsonBytes(added))
-                .with(userDetailsService(IntegrationTestUtil.CORRECT_USERNAME))
+                .contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8)
+                .content(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.convertObjectToJsonBytes(added))
+                .with(userDetailsService(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.CORRECT_USERNAME))
         )
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(content().string("{\"id\":3,\"description\":\"description\",\"title\":\"title\"}"));
     }
 
@@ -98,8 +98,8 @@ public class ITTodoControllerTest {
     public void addEmptyTodoAsAnonymous() throws Exception {
         TodoDTO added = TodoTestUtil.createDTO(null, "", "");
         mockMvc.perform(post("/api/todo")
-                .contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8)
-                .content(IntegrationTestUtil.convertObjectToJsonBytes(added))
+                .contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8)
+                .content(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.convertObjectToJsonBytes(added))
         )
                 .andExpect(status().isBadRequest());
     }
@@ -109,12 +109,12 @@ public class ITTodoControllerTest {
     public void addEmptyTodoAsUser() throws Exception {
         TodoDTO added = TodoTestUtil.createDTO(null, "", "");
         mockMvc.perform(post("/api/todo")
-                .contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8)
-                .content(IntegrationTestUtil.convertObjectToJsonBytes(added))
-                .with(userDetailsService(IntegrationTestUtil.CORRECT_USERNAME))
+                .contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8)
+                .content(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.convertObjectToJsonBytes(added))
+                .with(userDetailsService(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.CORRECT_USERNAME))
         )
                 .andExpect(status().isBadRequest())
-                .andExpect(content().contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(content().string("{\"fieldErrors\":[{\"path\":\"title\",\"message\":\"The title cannot be empty.\"}]}"));
     }
 
@@ -126,8 +126,8 @@ public class ITTodoControllerTest {
         TodoDTO added = TodoTestUtil.createDTO(null, description, title);
 
         mockMvc.perform(post("/api/todo")
-                .contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8)
-                .content(IntegrationTestUtil.convertObjectToJsonBytes(added))
+                .contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8)
+                .content(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.convertObjectToJsonBytes(added))
         )
                 .andExpect(status().isBadRequest());
     }
@@ -140,12 +140,12 @@ public class ITTodoControllerTest {
         TodoDTO added = TodoTestUtil.createDTO(null, description, title);
 
         mockMvc.perform(post("/api/todo")
-                .contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8)
-                .content(IntegrationTestUtil.convertObjectToJsonBytes(added))
-                .with(userDetailsService(IntegrationTestUtil.CORRECT_USERNAME))
+                .contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8)
+                .content(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.convertObjectToJsonBytes(added))
+                .with(userDetailsService(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.CORRECT_USERNAME))
         )
                 .andExpect(status().isBadRequest())
-                .andExpect(content().contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(content().string(startsWith("{\"fieldErrors\":[")))
                 .andExpect(content().string(allOf(
                         containsString("{\"path\":\"description\",\"message\":\"The maximum length of the description is 500 characters.\"}"),
@@ -165,10 +165,10 @@ public class ITTodoControllerTest {
     @ExpectedDatabase("toDoData-delete-expected.xml")
     public void deleteByIdAsUser() throws Exception {
         mockMvc.perform(delete("/api/todo/{id}", 1L)
-                .with(userDetailsService(IntegrationTestUtil.CORRECT_USERNAME))
+                .with(userDetailsService(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.CORRECT_USERNAME))
         )
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(content().string("{\"id\":1,\"description\":\"Lorem ipsum\",\"title\":\"Foo\"}"));
     }
 
@@ -183,7 +183,7 @@ public class ITTodoControllerTest {
     @ExpectedDatabase("toDoData.xml")
     public void deleteByIdWhenTodoIsNotFoundAsUser() throws Exception {
         mockMvc.perform(delete("/api/todo/{id}", 3L)
-                .with(userDetailsService(IntegrationTestUtil.CORRECT_USERNAME))
+                .with(userDetailsService(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.CORRECT_USERNAME))
         )
                 .andExpect(status().isNotFound());
     }
@@ -199,10 +199,10 @@ public class ITTodoControllerTest {
     @ExpectedDatabase("toDoData.xml")
     public void findAllAsUser() throws Exception {
         mockMvc.perform(get("/api/todo")
-                .with(userDetailsService(IntegrationTestUtil.CORRECT_USERNAME))
+                .with(userDetailsService(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.CORRECT_USERNAME))
         )
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(content().string("[{\"id\":1,\"description\":\"Lorem ipsum\",\"title\":\"Foo\"},{\"id\":2,\"description\":\"Lorem ipsum\",\"title\":\"Bar\"}]"));
     }
 
@@ -217,10 +217,10 @@ public class ITTodoControllerTest {
     @ExpectedDatabase("toDoData.xml")
     public void findByIdAsUser() throws Exception {
         mockMvc.perform(get("/api/todo/{id}", 1L)
-                .with(userDetailsService(IntegrationTestUtil.CORRECT_USERNAME))
+                .with(userDetailsService(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.CORRECT_USERNAME))
         )
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(content().string("{\"id\":1,\"description\":\"Lorem ipsum\",\"title\":\"Foo\"}"));
     }
 
@@ -235,7 +235,7 @@ public class ITTodoControllerTest {
     @ExpectedDatabase("toDoData.xml")
     public void findByIdWhenTodoIsNotFoundAsUser() throws Exception {
         mockMvc.perform(get("/api/todo/{id}", 3L)
-                .with(userDetailsService(IntegrationTestUtil.CORRECT_USERNAME))
+                .with(userDetailsService(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.CORRECT_USERNAME))
         )
                 .andExpect(status().isNotFound());
     }
@@ -246,8 +246,8 @@ public class ITTodoControllerTest {
         TodoDTO updated = TodoTestUtil.createDTO(1L, "description", "title");
 
         mockMvc.perform(put("/api/todo/{id}", 1L)
-                .contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8)
-                .content(IntegrationTestUtil.convertObjectToJsonBytes(updated))
+                .contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8)
+                .content(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.convertObjectToJsonBytes(updated))
         )
                 .andExpect(status().isUnauthorized());
     }
@@ -258,12 +258,12 @@ public class ITTodoControllerTest {
         TodoDTO updated = TodoTestUtil.createDTO(1L, "description", "title");
 
         mockMvc.perform(put("/api/todo/{id}", 1L)
-                .contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8)
-                .content(IntegrationTestUtil.convertObjectToJsonBytes(updated))
-                .with(userDetailsService(IntegrationTestUtil.CORRECT_USERNAME))
+                .contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8)
+                .content(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.convertObjectToJsonBytes(updated))
+                .with(userDetailsService(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.CORRECT_USERNAME))
         )
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(content().string("{\"id\":1,\"description\":\"description\",\"title\":\"title\"}"));
     }
 
@@ -273,8 +273,8 @@ public class ITTodoControllerTest {
         TodoDTO updated = TodoTestUtil.createDTO(1L, "", "");
 
         mockMvc.perform(put("/api/todo/{id}", 1L)
-                .contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8)
-                .content(IntegrationTestUtil.convertObjectToJsonBytes(updated))
+                .contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8)
+                .content(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.convertObjectToJsonBytes(updated))
         )
                 .andExpect(status().isBadRequest());
     }
@@ -285,12 +285,12 @@ public class ITTodoControllerTest {
         TodoDTO updated = TodoTestUtil.createDTO(1L, "", "");
 
         mockMvc.perform(put("/api/todo/{id}", 1L)
-                .contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8)
-                .content(IntegrationTestUtil.convertObjectToJsonBytes(updated))
-                .with(userDetailsService(IntegrationTestUtil.CORRECT_USERNAME))
+                .contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8)
+                .content(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.convertObjectToJsonBytes(updated))
+                .with(userDetailsService(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.CORRECT_USERNAME))
         )
                 .andExpect(status().isBadRequest())
-                .andExpect(content().contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(content().string("{\"fieldErrors\":[{\"path\":\"title\",\"message\":\"The title cannot be empty.\"}]}"));
     }
 
@@ -303,8 +303,8 @@ public class ITTodoControllerTest {
         TodoDTO updated = TodoTestUtil.createDTO(1L, description, title);
 
         mockMvc.perform(put("/api/todo/{id}", 1L)
-                .contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8)
-                .content(IntegrationTestUtil.convertObjectToJsonBytes(updated))
+                .contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8)
+                .content(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.convertObjectToJsonBytes(updated))
         )
                 .andExpect(status().isBadRequest());
     }
@@ -318,12 +318,12 @@ public class ITTodoControllerTest {
         TodoDTO updated = TodoTestUtil.createDTO(1L, description, title);
 
         mockMvc.perform(put("/api/todo/{id}", 1L)
-                .contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8)
-                .content(IntegrationTestUtil.convertObjectToJsonBytes(updated))
-                .with(userDetailsService(IntegrationTestUtil.CORRECT_USERNAME))
+                .contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8)
+                .content(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.convertObjectToJsonBytes(updated))
+                .with(userDetailsService(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.CORRECT_USERNAME))
         )
                 .andExpect(status().isBadRequest())
-                .andExpect(content().contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(content().string(startsWith("{\"fieldErrors\":[")))
                 .andExpect(content().string(allOf(
                         containsString("{\"path\":\"description\",\"message\":\"The maximum length of the description is 500 characters.\"}"),
@@ -338,8 +338,8 @@ public class ITTodoControllerTest {
         TodoDTO updated = TodoTestUtil.createDTO(3L, "description", "title");
 
         mockMvc.perform(put("/api/todo/{id}", 3L)
-                .contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8)
-                .content(IntegrationTestUtil.convertObjectToJsonBytes(updated))
+                .contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8)
+                .content(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.convertObjectToJsonBytes(updated))
         )
                 .andExpect(status().isUnauthorized());
     }
@@ -350,9 +350,9 @@ public class ITTodoControllerTest {
         TodoDTO updated = TodoTestUtil.createDTO(3L, "description", "title");
 
         mockMvc.perform(put("/api/todo/{id}", 3L)
-                .contentType(IntegrationTestUtil.APPLICATION_JSON_UTF8)
-                .content(IntegrationTestUtil.convertObjectToJsonBytes(updated))
-                .with(userDetailsService(IntegrationTestUtil.CORRECT_USERNAME))
+                .contentType(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.APPLICATION_JSON_UTF8)
+                .content(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.convertObjectToJsonBytes(updated))
+                .with(userDetailsService(net.petrikainulainen.spring.datasolr.IntegrationTestUtil.CORRECT_USERNAME))
         )
                 .andExpect(status().isNotFound());
     }
