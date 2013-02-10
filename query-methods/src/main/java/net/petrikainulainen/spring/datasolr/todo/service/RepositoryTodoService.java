@@ -22,6 +22,9 @@ public class RepositoryTodoService implements TodoService {
     private static final Logger LOGGER = LoggerFactory.getLogger(RepositoryTodoService.class);
 
     @Resource
+    private TodoDocumentService documentService;
+
+    @Resource
     private TodoRepository repository;
 
     @PreAuthorize("hasPermission('Todo', 'add')")
@@ -34,7 +37,10 @@ public class RepositoryTodoService implements TodoService {
                 .description(added.getDescription())
                 .build();
 
-        return repository.save(model);
+        Todo persisted = repository.save(model);
+        documentService.add(persisted);
+
+        return persisted;
     }
 
     @PreAuthorize("hasPermission('Todo', 'delete')")
@@ -47,6 +53,8 @@ public class RepositoryTodoService implements TodoService {
         LOGGER.debug("Deleting to-do entry: {}", deleted);
 
         repository.delete(deleted);
+        documentService.deleteById(id);
+
         return deleted;
     }
 
@@ -84,6 +92,8 @@ public class RepositoryTodoService implements TodoService {
         LOGGER.debug("Found a to-do entry: {}", model);
 
         model.update(updated.getDescription(), updated.getTitle());
+
+        documentService.update(model);
 
         return model;
     }
