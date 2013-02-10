@@ -1,6 +1,6 @@
-package net.petrikainulainen.spring.testmvc.common.controller;
+package net.petrikainulainen.spring.datasolr.common.controller;
 
-import net.petrikainulainen.spring.testmvc.config.ExampleApplicationContext;
+import net.petrikainulainen.spring.datasolr.config.ExampleApplicationContext;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

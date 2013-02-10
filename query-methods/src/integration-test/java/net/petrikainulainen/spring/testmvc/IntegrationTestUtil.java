@@ -1,4 +1,4 @@
-package net.petrikainulainen.spring.testmvc;
+package net.petrikainulainen.spring.datasolr;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.annotate.JsonSerialize;

@@ -29,7 +29,7 @@
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>
-        <property name="packagesToScan" value="net.petrikainulainen.spring.testmvc.todo.model"/>
+        <property name="packagesToScan" value="net.petrikainulainen.spring.datasolr.todo.model"/>
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
@@ -41,5 +41,5 @@
         </property>
     </bean>
 
-    <jpa:repositories base-package="net.petrikainulainen.spring.testmvc.todo.repository"/>
+    <jpa:repositories base-package="net.petrikainulainen.spring.datasolr.todo.repository"/>
 </beans>

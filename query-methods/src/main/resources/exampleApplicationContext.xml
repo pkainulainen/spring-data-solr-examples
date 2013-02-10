@@ -15,11 +15,11 @@
     <mvc:resources mapping="/static/**" location="/static/"/>
     <mvc:default-servlet-handler/>
 
-    <context:component-scan base-package="net.petrikainulainen.spring.testmvc.common"/>
-    <context:component-scan base-package="net.petrikainulainen.spring.testmvc.security"/>
-    <context:component-scan base-package="net.petrikainulainen.spring.testmvc.todo.controller"/>
-    <context:component-scan base-package="net.petrikainulainen.spring.testmvc.todo.service"/>
-    <context:component-scan base-package="net.petrikainulainen.spring.testmvc.user.controller"/>
+    <context:component-scan base-package="net.petrikainulainen.spring.datasolr.common"/>
+    <context:component-scan base-package="net.petrikainulainen.spring.datasolr.security"/>
+    <context:component-scan base-package="net.petrikainulainen.spring.datasolr.todo.controller"/>
+    <context:component-scan base-package="net.petrikainulainen.spring.datasolr.todo.service"/>
+    <context:component-scan base-package="net.petrikainulainen.spring.datasolr.user.controller"/>
 
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="i18n/messages"/>

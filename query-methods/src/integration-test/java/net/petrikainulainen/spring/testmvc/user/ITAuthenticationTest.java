@@ -1,7 +1,7 @@
-package net.petrikainulainen.spring.testmvc.user;
+package net.petrikainulainen.spring.datasolr.user;
 
-import net.petrikainulainen.spring.testmvc.IntegrationTestUtil;
-import net.petrikainulainen.spring.testmvc.config.ExampleApplicationContext;
+import net.petrikainulainen.spring.datasolr.IntegrationTestUtil;
+import net.petrikainulainen.spring.datasolr.config.ExampleApplicationContext;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

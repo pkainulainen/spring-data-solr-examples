@@ -1,14 +1,13 @@
-package net.petrikainulainen.spring.testmvc.todo.controller;
+package net.petrikainulainen.spring.datasolr.todo.controller;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
-import net.petrikainulainen.spring.testmvc.*;
-import net.petrikainulainen.spring.testmvc.config.ExampleApplicationContext;
-import net.petrikainulainen.spring.testmvc.todo.TodoTestUtil;
-import net.petrikainulainen.spring.testmvc.todo.dto.TodoDTO;
-import net.petrikainulainen.spring.testmvc.todo.model.Todo;
+import net.petrikainulainen.spring.datasolr.config.ExampleApplicationContext;
+import net.petrikainulainen.spring.datasolr.todo.TodoTestUtil;
+import net.petrikainulainen.spring.datasolr.todo.dto.TodoDTO;
+import net.petrikainulainen.spring.datasolr.todo.model.Todo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
