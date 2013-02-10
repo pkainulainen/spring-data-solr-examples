@@ -3,7 +3,7 @@ package net.petrikainulainen.spring.datasolr.todo.service;
 import net.petrikainulainen.spring.datasolr.todo.dto.TodoDTO;
 import net.petrikainulainen.spring.datasolr.todo.exception.TodoNotFoundException;
 import net.petrikainulainen.spring.datasolr.todo.model.Todo;
-import net.petrikainulainen.spring.datasolr.todo.repository.TodoRepository;
+import net.petrikainulainen.spring.datasolr.todo.repository.jpa.TodoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;

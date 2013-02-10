@@ -4,7 +4,7 @@ import net.petrikainulainen.spring.datasolr.todo.TodoTestUtil;
 import net.petrikainulainen.spring.datasolr.todo.dto.TodoDTO;
 import net.petrikainulainen.spring.datasolr.todo.exception.TodoNotFoundException;
 import net.petrikainulainen.spring.datasolr.todo.model.Todo;
-import net.petrikainulainen.spring.datasolr.todo.repository.TodoRepository;
+import net.petrikainulainen.spring.datasolr.todo.repository.jpa.TodoRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;

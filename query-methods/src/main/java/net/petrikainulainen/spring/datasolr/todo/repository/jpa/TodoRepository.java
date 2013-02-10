@@ -1,4 +1,4 @@
-package net.petrikainulainen.spring.datasolr.todo.repository;
+package net.petrikainulainen.spring.datasolr.todo.repository.jpa;
 
 import net.petrikainulainen.spring.datasolr.todo.model.Todo;
 import org.springframework.data.jpa.repository.JpaRepository;

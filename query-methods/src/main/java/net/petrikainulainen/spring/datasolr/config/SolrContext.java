@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * @author Petri Kainulainen
  */
 @Configuration
-@EnableSolrRepositories("net.petrikainulainen.spring.datasolr.todo.repository.datasolr")
+@EnableSolrRepositories("net.petrikainulainen.spring.datasolr.todo.repository.solr")
 public class SolrContext {
 
     private static final String PROPERTY_NAME_SOLR_SERVER_URL = "datasolr.server.url";

@@ -19,7 +19,7 @@ import java.util.Properties;
  */
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "net.petrikainulainen.spring.datasolr.todo.repository")
+@EnableJpaRepositories(basePackages = "net.petrikainulainen.spring.datasolr.todo.repository.jpa")
 public class PersistenceContext {
 
     protected static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
