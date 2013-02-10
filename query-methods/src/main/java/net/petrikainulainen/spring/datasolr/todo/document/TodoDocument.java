@@ -1,5 +1,6 @@
 package net.petrikainulainen.spring.datasolr.todo.document;
 
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.solr.client.solrj.beans.Field;
 
 /**
@@ -20,8 +21,8 @@ public class TodoDocument {
 
     }
 
-    public static Builder getBuilder(String title) {
-        return new Builder(title);
+    public static Builder getBuilder(Long id, String title) {
+        return new Builder(id, title);
     }
 
     public Long getId() {
@@ -36,11 +37,17 @@ public class TodoDocument {
         return title;
     }
 
+    @Override
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
+    }
+
     public static class Builder {
         private TodoDocument build;
 
-        public Builder(String title) {
+        public Builder(Long id, String title) {
             build = new TodoDocument();
+            build.id = id;
             build.title = title;
         }
 
