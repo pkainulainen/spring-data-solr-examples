@@ -36,6 +36,7 @@
         <spring.data.version>1.2.0.RELEASE</spring.data.version>
         <spring.data.solr.version>1.0.0.RC1</spring.data.solr.version>
         <spring.security.version>3.1.2.RELEASE</spring.security.version>
+        <solr.version>4.1.0</solr.version>
 
         <build.profile.id>dev</build.profile.id>
         <skip.integration.tests>true</skip.integration.tests>
@@ -328,6 +329,13 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-solr</artifactId>
             <version>${spring.data.solr.version}</version>
+        </dependency>
+
+        <!-- Required by embedded solr server -->
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-core</artifactId>
+            <version>${solr.version}</version>
         </dependency>
 
         <!-- Servlet API 3.0 -->
