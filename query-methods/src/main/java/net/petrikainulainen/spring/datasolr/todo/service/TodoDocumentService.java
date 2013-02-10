@@ -7,9 +7,7 @@ import net.petrikainulainen.spring.datasolr.todo.model.Todo;
  */
 public interface TodoDocumentService {
 
-    public void add(Todo todoEntry);
-
     public void deleteById(Long id);
 
-    public void update(Todo todoEntry);
+    public void save(Todo todoEntry);
 }

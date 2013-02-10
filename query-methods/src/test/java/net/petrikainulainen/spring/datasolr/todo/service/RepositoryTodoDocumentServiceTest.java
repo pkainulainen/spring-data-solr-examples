@@ -30,23 +30,6 @@ public class RepositoryTodoDocumentServiceTest {
     }
 
     @Test
-    public void add() {
-        Todo todoEntry = TodoTestUtil.createModel(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
-
-        service.add(todoEntry);
-
-        ArgumentCaptor<TodoDocument> todoDocumentArgument = ArgumentCaptor.forClass(TodoDocument.class);
-        verify(repositoryMock, times(1)).save(todoDocumentArgument.capture());
-        verifyNoMoreInteractions(repositoryMock);
-
-        TodoDocument todoDocument = todoDocumentArgument.getValue();
-
-        assertEquals(todoEntry.getId(), todoDocument.getId());
-        assertEquals(todoEntry.getDescription(), todoDocument.getDescription());
-        assertEquals(todoEntry.getTitle(), todoDocument.getTitle());
-    }
-
-    @Test
     public void deleteById() {
         service.deleteById(1L);
 
@@ -55,10 +38,10 @@ public class RepositoryTodoDocumentServiceTest {
     }
 
     @Test
-    public void update() {
+    public void save() {
         Todo todoEntry = TodoTestUtil.createModel(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
 
-        service.update(todoEntry);
+        service.save(todoEntry);
 
         ArgumentCaptor<TodoDocument> todoDocumentArgument = ArgumentCaptor.forClass(TodoDocument.class);
         verify(repositoryMock, times(1)).save(todoDocumentArgument.capture());

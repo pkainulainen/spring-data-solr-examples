@@ -21,24 +21,14 @@ public class RepositoryTodoDocumentService implements TodoDocumentService {
     private TodoDocumentRepository repository;
 
     @Override
-    public void add(Todo todoEntry) {
-        LOGGER.debug("Adding a new todo document with information: {}", todoEntry);
-        saveDocument(todoEntry);
-    }
-
-    @Override
     public void deleteById(Long id) {
         LOGGER.debug("Deleting an existing document with id: {}", id);
         repository.delete(id);
     }
 
     @Override
-    public void update(Todo todoEntry) {
-        LOGGER.debug("Updating an existing document with information: {}", todoEntry);
-        saveDocument(todoEntry);
-    }
-
-    private void saveDocument(Todo todoEntry) {
+    public void save(Todo todoEntry) {
+        LOGGER.debug("Saving a todo entry with information: {}", todoEntry);
         TodoDocument document = TodoDocument.getBuilder(todoEntry.getId(), todoEntry.getTitle())
                 .description(todoEntry.getDescription())
                 .build();

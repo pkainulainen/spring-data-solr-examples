@@ -38,7 +38,7 @@ public class RepositoryTodoService implements TodoService {
                 .build();
 
         Todo persisted = repository.save(model);
-        documentService.add(persisted);
+        documentService.save(persisted);
 
         return persisted;
     }
@@ -93,7 +93,7 @@ public class RepositoryTodoService implements TodoService {
 
         model.update(updated.getDescription(), updated.getTitle());
 
-        documentService.update(model);
+        documentService.save(model);
 
         return model;
     }

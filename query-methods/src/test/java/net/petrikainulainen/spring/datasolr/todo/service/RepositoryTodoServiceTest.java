@@ -52,7 +52,7 @@ public class RepositoryTodoServiceTest {
         verify(repositoryMock, times(1)).save(toDoArgument.capture());
         verifyNoMoreInteractions(repositoryMock);
 
-        verify(documentServiceMock, times(1)).add(persisted);
+        verify(documentServiceMock, times(1)).save(persisted);
         verifyNoMoreInteractions(documentServiceMock);
 
         Todo model = toDoArgument.getValue();
@@ -140,7 +140,7 @@ public class RepositoryTodoServiceTest {
         verify(repositoryMock, times(1)).findOne(dto.getId());
         verifyNoMoreInteractions(repositoryMock);
 
-        verify(documentServiceMock, times(1)).update(model);
+        verify(documentServiceMock, times(1)).save(model);
         verifyNoMoreInteractions(documentServiceMock);
 
         assertEquals(dto.getId(), actual.getId());
