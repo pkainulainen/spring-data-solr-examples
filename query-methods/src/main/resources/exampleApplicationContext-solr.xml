@@ -8,19 +8,26 @@
 
     <context:property-placeholder location="classpath:application.properties"/>
 
+    <!-- Enable Solr repositories and configure repository base package -->
     <solr:repositories base-package="net.petrikainulainen.spring.datasolr.todo.repository.solr"/>
 
+    <!-- Bean definitions for the dev profile -->
     <beans profile="dev">
+        <!-- Configures embedded Solr server -->
         <solr:embedded-solr-server id="solrServer" solrHome="${solr.solr.home}"/>
 
+        <!-- Configures Solr template -->
         <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
             <constructor-arg index="0" ref="solrServer"/>
         </bean>
     </beans>
 
+    <!-- Bean definitions for the prod profile -->
     <beans profile="prod">
+        <!-- Configures HTTP Solr server -->
         <solr:solr-server id="solrServer" url="${solr.server.url}"/>
 
+        <!-- Configures Solr template -->
         <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
             <constructor-arg index="0" ref="solrServer"/>
         </bean>
