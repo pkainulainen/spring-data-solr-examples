@@ -9,6 +9,7 @@
 
     <import resource="exampleApplicationContext-persistence.xml"/>
     <import resource="exampleApplicationContext-security.xml"/>
+    <import resource="exampleApplicationContext-solr.xml"/>
 
     <mvc:annotation-driven/>
 

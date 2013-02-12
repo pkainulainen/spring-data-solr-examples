@@ -32,16 +32,6 @@ public class EmbeddedSolrContext {
         return factory;
     }
 
-    /*
-    @Bean
-    public HttpSolrServerFactoryBean solrServerFactoryBean() {
-        HttpSolrServerFactoryBean factory = new HttpSolrServerFactoryBean();
-
-        factory.setUrl(environment.getRequiredProperty(PROPERTY_NAME_SOLR_SERVER_URL));
-
-        return factory;
-    }*/
-
     @Bean
     public SolrTemplate solrTemplate() throws Exception {
         return new SolrTemplate(solrServerFactoryBean().getObject());
