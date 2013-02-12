@@ -23,7 +23,7 @@ import org.springframework.web.servlet.view.JstlView;
         "net.petrikainulainen.spring.datasolr.security",
         "net.petrikainulainen.spring.datasolr.user.controller"
 })
-@Import({PersistenceContext.class, SolrContext.class})
+@Import({EmbeddedSolrContext.class, HttpSolrContext.class, PersistenceContext.class})
 @ImportResource("classpath:exampleApplicationContext-security.xml")
 @PropertySource("classpath:application.properties")
 public class ExampleApplicationContext extends WebMvcConfigurerAdapter {

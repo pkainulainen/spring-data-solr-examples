@@ -180,6 +180,11 @@
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>8.1.5.v20120716</version>
+                <configuration>
+                    <stopKey>todostop</stopKey>
+                    <stopPort>9999</stopPort>
+                    <systemPropertiesFile>${project.basedir}/profiles/${build.profile.id}/system.properties</systemPropertiesFile>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
