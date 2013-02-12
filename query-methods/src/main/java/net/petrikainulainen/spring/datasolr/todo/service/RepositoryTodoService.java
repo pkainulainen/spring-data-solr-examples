@@ -22,7 +22,7 @@ public class RepositoryTodoService implements TodoService {
     private static final Logger LOGGER = LoggerFactory.getLogger(RepositoryTodoService.class);
 
     @Resource
-    private TodoDocumentService documentService;
+    private TodoIndexService indexService;
 
     @Resource
     private TodoRepository repository;
@@ -38,7 +38,7 @@ public class RepositoryTodoService implements TodoService {
                 .build();
 
         Todo persisted = repository.save(model);
-        documentService.save(persisted);
+        indexService.addToIndex(persisted);
 
         return persisted;
     }
@@ -53,7 +53,7 @@ public class RepositoryTodoService implements TodoService {
         LOGGER.debug("Deleting to-do entry: {}", deleted);
 
         repository.delete(deleted);
-        documentService.deleteById(id);
+        indexService.deleteFromIndex(id);
 
         return deleted;
     }
@@ -93,7 +93,7 @@ public class RepositoryTodoService implements TodoService {
 
         model.update(updated.getDescription(), updated.getTitle());
 
-        documentService.save(model);
+        indexService.addToIndex(model);
 
         return model;
     }

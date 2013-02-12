@@ -5,9 +5,9 @@ import net.petrikainulainen.spring.datasolr.todo.model.Todo;
 /**
  * @author Petri Kainulainen
  */
-public interface TodoDocumentService {
+public interface TodoIndexService {
 
-    public void deleteById(Long id);
+    public void addToIndex(Todo todoEntry);
 
-    public void save(Todo todoEntry);
+    public void deleteFromIndex(Long id);
 }

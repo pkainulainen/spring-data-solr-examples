@@ -15,33 +15,25 @@ import static org.mockito.Mockito.*;
 /**
  * @author Petri Kainulainen
  */
-public class RepositoryTodoDocumentServiceTest {
+public class RepositoryTodoIndexServiceTest {
 
-    private RepositoryTodoDocumentService service;
+    private RepositoryTodoIndexService service;
 
     private TodoDocumentRepository repositoryMock;
 
     @Before
     public void setUp() {
-        service = new RepositoryTodoDocumentService();
+        service = new RepositoryTodoIndexService();
 
         repositoryMock = mock(TodoDocumentRepository.class);
         ReflectionTestUtils.setField(service, "repository", repositoryMock);
     }
 
     @Test
-    public void deleteById() {
-        service.deleteById(1L);
-
-        verify(repositoryMock, times(1)).delete(1L);
-        verifyNoMoreInteractions(repositoryMock);
-    }
-
-    @Test
-    public void save() {
+    public void addToIndex() {
         Todo todoEntry = TodoTestUtil.createModel(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
 
-        service.save(todoEntry);
+        service.addToIndex(todoEntry);
 
         ArgumentCaptor<TodoDocument> todoDocumentArgument = ArgumentCaptor.forClass(TodoDocument.class);
         verify(repositoryMock, times(1)).save(todoDocumentArgument.capture());
@@ -52,5 +44,13 @@ public class RepositoryTodoDocumentServiceTest {
         assertEquals(todoEntry.getId(), todoDocument.getId());
         assertEquals(todoEntry.getDescription(), todoDocument.getDescription());
         assertEquals(todoEntry.getTitle(), todoDocument.getTitle());
+    }
+
+    @Test
+    public void deleteFromIndex() {
+        service.deleteFromIndex(1L);
+
+        verify(repositoryMock, times(1)).delete(1L);
+        verifyNoMoreInteractions(repositoryMock);
     }
 }

@@ -6,6 +6,7 @@ import net.petrikainulainen.spring.datasolr.todo.repository.solr.TodoDocumentRep
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -13,23 +14,16 @@ import javax.annotation.Resource;
  * @author Petri Kainulainen
  */
 @Service
-public class RepositoryTodoDocumentService implements TodoDocumentService {
+public class RepositoryTodoIndexService implements TodoIndexService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RepositoryTodoDocumentService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RepositoryTodoIndexService.class);
 
     @Resource
     private TodoDocumentRepository repository;
 
+    @Transactional
     @Override
-    public void deleteById(Long id) {
-        LOGGER.debug("Deleting an existing document with id: {}", id);
-
-        //Todo: Find out if Spring Data Solr will support id's which are not Strings.
-        repository.delete(id);
-    }
-
-    @Override
-    public void save(Todo todoEntry) {
+    public void addToIndex(Todo todoEntry) {
         LOGGER.debug("Saving a todo entry with information: {}", todoEntry);
         TodoDocument document = TodoDocument.getBuilder(todoEntry.getId(), todoEntry.getTitle())
                 .description(todoEntry.getDescription())
@@ -38,5 +32,14 @@ public class RepositoryTodoDocumentService implements TodoDocumentService {
         LOGGER.debug("Saving document with information: {}", document);
 
         repository.save(document);
+    }
+
+    @Transactional
+    @Override
+    public void deleteFromIndex(Long id) {
+        LOGGER.debug("Deleting an existing document with id: {}", id);
+
+        //Todo: Find out if Spring Data Solr will support id's which are not Strings.
+        repository.delete(id);
     }
 }

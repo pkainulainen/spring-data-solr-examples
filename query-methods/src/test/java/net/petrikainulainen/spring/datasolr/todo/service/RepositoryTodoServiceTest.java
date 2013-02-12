@@ -26,7 +26,7 @@ public class RepositoryTodoServiceTest {
 
     private TodoRepository repositoryMock;
 
-    private TodoDocumentService documentServiceMock;
+    private TodoIndexService indexServiceMock;
 
     @Before
     public void setUp() {
@@ -35,8 +35,8 @@ public class RepositoryTodoServiceTest {
         repositoryMock = mock(TodoRepository.class);
         ReflectionTestUtils.setField(service, "repository", repositoryMock);
 
-        documentServiceMock = mock(TodoDocumentService.class);
-        ReflectionTestUtils.setField(service, "documentService", documentServiceMock);
+        indexServiceMock = mock(TodoIndexService.class);
+        ReflectionTestUtils.setField(service, "indexService", indexServiceMock);
     }
 
     @Test
@@ -52,8 +52,8 @@ public class RepositoryTodoServiceTest {
         verify(repositoryMock, times(1)).save(toDoArgument.capture());
         verifyNoMoreInteractions(repositoryMock);
 
-        verify(documentServiceMock, times(1)).save(persisted);
-        verifyNoMoreInteractions(documentServiceMock);
+        verify(indexServiceMock, times(1)).addToIndex(persisted);
+        verifyNoMoreInteractions(indexServiceMock);
 
         Todo model = toDoArgument.getValue();
 
@@ -73,8 +73,8 @@ public class RepositoryTodoServiceTest {
         verify(repositoryMock, times(1)).delete(model);
         verifyNoMoreInteractions(repositoryMock);
 
-        verify(documentServiceMock, times(1)).deleteById(TodoTestUtil.ID);
-        verifyNoMoreInteractions(documentServiceMock);
+        verify(indexServiceMock, times(1)).deleteFromIndex(TodoTestUtil.ID);
+        verifyNoMoreInteractions(indexServiceMock);
 
         assertEquals(model, actual);
     }
@@ -87,7 +87,7 @@ public class RepositoryTodoServiceTest {
 
         verify(repositoryMock, times(1)).findOne(TodoTestUtil.ID);
         verifyNoMoreInteractions(repositoryMock);
-        verifyZeroInteractions(documentServiceMock);
+        verifyZeroInteractions(indexServiceMock);
     }
 
     @Test
@@ -99,7 +99,7 @@ public class RepositoryTodoServiceTest {
 
         verify(repositoryMock, times(1)).findAll();
         verifyNoMoreInteractions(repositoryMock);
-        verifyZeroInteractions(documentServiceMock);
+        verifyZeroInteractions(indexServiceMock);
 
         assertEquals(models, actual);
     }
@@ -113,7 +113,7 @@ public class RepositoryTodoServiceTest {
 
         verify(repositoryMock, times(1)).findOne(TodoTestUtil.ID);
         verifyNoMoreInteractions(repositoryMock);
-        verifyZeroInteractions(documentServiceMock);
+        verifyZeroInteractions(indexServiceMock);
 
         assertEquals(model, actual);
     }
@@ -126,7 +126,7 @@ public class RepositoryTodoServiceTest {
 
         verify(repositoryMock, times(1)).findOne(TodoTestUtil.ID);
         verifyNoMoreInteractions(repositoryMock);
-        verifyZeroInteractions(documentServiceMock);
+        verifyZeroInteractions(indexServiceMock);
     }
 
     @Test
@@ -140,8 +140,8 @@ public class RepositoryTodoServiceTest {
         verify(repositoryMock, times(1)).findOne(dto.getId());
         verifyNoMoreInteractions(repositoryMock);
 
-        verify(documentServiceMock, times(1)).save(model);
-        verifyNoMoreInteractions(documentServiceMock);
+        verify(indexServiceMock, times(1)).addToIndex(model);
+        verifyNoMoreInteractions(indexServiceMock);
 
         assertEquals(dto.getId(), actual.getId());
         assertEquals(dto.getDescription(), actual.getDescription());
@@ -157,6 +157,6 @@ public class RepositoryTodoServiceTest {
 
         verify(repositoryMock, times(1)).findOne(dto.getId());
         verifyNoMoreInteractions(repositoryMock);
-        verifyZeroInteractions(documentServiceMock);
+        verifyZeroInteractions(indexServiceMock);
     }
 }
