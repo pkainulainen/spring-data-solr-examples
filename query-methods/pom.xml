@@ -59,6 +59,12 @@
                 <skip.unit.tests>true</skip.unit.tests>
             </properties>
         </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <build.profile.id>prod</build.profile.id>
+            </properties>
+        </profile>
     </profiles>
 
     <build>

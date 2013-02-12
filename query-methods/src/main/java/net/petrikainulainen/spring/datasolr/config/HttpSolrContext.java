@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 @Profile("prod")
 public class HttpSolrContext {
 
-    private static final String PROPERTY_NAME_SOLR_SERVER_URL = "datasolr.server.url";
+    private static final String PROPERTY_NAME_SOLR_SERVER_URL = "solr.server.url";
 
     @Resource
     private Environment environment;
