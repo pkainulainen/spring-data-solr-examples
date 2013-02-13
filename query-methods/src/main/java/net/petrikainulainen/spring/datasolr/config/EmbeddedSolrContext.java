@@ -24,6 +24,7 @@ public class EmbeddedSolrContext {
     @Resource
     private Environment environment;
 
+    @Bean
     public EmbeddedSolrServerFactoryBean solrServerFactoryBean() {
         EmbeddedSolrServerFactoryBean factory = new EmbeddedSolrServerFactoryBean();
 
