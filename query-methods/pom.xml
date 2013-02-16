@@ -20,7 +20,7 @@
     <repositories>
         <repository>
             <id>spring-milestone</id>
-            <name>Spring Maven SNAPSHOT Repository</name>
+            <name>Spring Milestone Maven Repository</name>
             <url>http://repo.springframework.org/milestone</url>
         </repository>
     </repositories>

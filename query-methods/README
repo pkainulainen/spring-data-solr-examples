@@ -4,6 +4,9 @@ This is an example application of my following blog entries:
 RUNNING THE APPLICATION:
 
 - Download and install Maven 3 (http://maven.apache.org/download.html#Installation). If you have already installed Maven 3, you can skip this step.
+- If you don't already have a local Solr installation, you have create one. You might want to read this
+  blog entry: http://www.petrikainulainen.net/programming/maven/running-solr-with-maven/
+- Configure the value of the solr.solr.home property found from the profile specific properties files (application.properties).
 - Go the root directory of project (The one which contains the pom.xml file)
 - Run command mvn clean jetty:run
 - Start your browser and go to the location: http://localhost:8080
@@ -12,5 +15,6 @@ RUNNING THE APPLICATION:
 RUNNING TESTS:
 
 - You can run unit tests by using this command: mvn test -P dev
-- You can run integration tests by using this command: mvn verify -P integration-test
+- The integration tests are not working at the moment but they would work, you could run them by
+  using a command: mvn verify -P integration-test
 

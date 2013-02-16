@@ -7,7 +7,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.repository.config.EnableSolrRepositories;
 import org.springframework.data.solr.server.support.EmbeddedSolrServerFactoryBean;
-import org.springframework.data.solr.server.support.HttpSolrServerFactoryBean;
 
 import javax.annotation.Resource;
 
