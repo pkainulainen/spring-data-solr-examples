@@ -1,5 +1,8 @@
 This is an example application of my following blog entries:
 
+- Spring Data Solr Tutorial: Configuration - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-configuration/
+
+NOTE: Only the functions described in the blog entries mentioned above are working at the moment.
 
 RUNNING THE APPLICATION:
 
