@@ -41,7 +41,7 @@ public class RepositoryTodoIndexServiceTest {
 
         TodoDocument todoDocument = todoDocumentArgument.getValue();
 
-        assertEquals(todoEntry.getId(), todoDocument.getId());
+        assertEquals(todoEntry.getId().toString(), todoDocument.getId());
         assertEquals(todoEntry.getDescription(), todoDocument.getDescription());
         assertEquals(todoEntry.getTitle(), todoDocument.getTitle());
     }
@@ -50,7 +50,7 @@ public class RepositoryTodoIndexServiceTest {
     public void deleteFromIndex() {
         service.deleteFromIndex(1L);
 
-        verify(repositoryMock, times(1)).delete(1L);
+        verify(repositoryMock, times(1)).delete("1");
         verifyNoMoreInteractions(repositoryMock);
     }
 }

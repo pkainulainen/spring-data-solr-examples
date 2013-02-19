@@ -6,5 +6,5 @@ import org.springframework.data.solr.repository.SolrCrudRepository;
 /**
  * @author Petri Kainulainen
  */
-public interface TodoDocumentRepository extends SolrCrudRepository<TodoDocument, Long> {
+public interface TodoDocumentRepository extends SolrCrudRepository<TodoDocument, String> {
 }

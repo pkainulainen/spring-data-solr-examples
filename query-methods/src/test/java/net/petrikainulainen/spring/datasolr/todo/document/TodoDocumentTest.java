@@ -11,6 +11,7 @@ import static junit.framework.Assert.assertNull;
 public class TodoDocumentTest {
 
     private static final Long ID = Long.valueOf(1);
+    private static final String ID_AS_STRING = ID.toString();
     private static final String DESCRIPTION = "description";
     private static final String TITLE = "title";
 
@@ -18,7 +19,7 @@ public class TodoDocumentTest {
     public void buildWithMandatoryValues() {
         TodoDocument document = TodoDocument.getBuilder(ID, TITLE).build();
 
-        assertEquals(ID, document.getId());
+        assertEquals(ID_AS_STRING, document.getId());
         assertNull(document.getDescription());
         assertEquals(TITLE, document.getTitle());
     }
@@ -29,7 +30,7 @@ public class TodoDocumentTest {
                 .description(DESCRIPTION)
                 .build();
 
-        assertEquals(ID, document.getId());
+        assertEquals(ID_AS_STRING, document.getId());
         assertEquals(DESCRIPTION, document.getDescription());
         assertEquals(TITLE, document.getTitle());
     }

@@ -9,7 +9,7 @@ import org.apache.solr.client.solrj.beans.Field;
 public class TodoDocument {
 
     @Field("id")
-    private Long id;
+    private String id;
 
     @Field("description")
     private String description;
@@ -25,7 +25,7 @@ public class TodoDocument {
         return new Builder(id, title);
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -47,7 +47,7 @@ public class TodoDocument {
 
         public Builder(Long id, String title) {
             build = new TodoDocument();
-            build.id = id;
+            build.id = id.toString();
             build.title = title;
         }
 
