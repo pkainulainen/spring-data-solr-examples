@@ -8,13 +8,13 @@ import org.apache.solr.client.solrj.beans.Field;
  */
 public class TodoDocument {
 
-    @Field("id")
+    @Field
     private String id;
 
-    @Field("description")
+    @Field
     private String description;
 
-    @Field("title")
+    @Field
     private String title;
 
     public TodoDocument() {
