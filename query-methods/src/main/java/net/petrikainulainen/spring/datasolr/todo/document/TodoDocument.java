@@ -2,12 +2,14 @@ package net.petrikainulainen.spring.datasolr.todo.document;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.solr.client.solrj.beans.Field;
+import org.springframework.data.annotation.Id;
 
 /**
  * @author Petri Kainulainen
  */
 public class TodoDocument {
 
+    @Id
     @Field
     private String id;
 
