@@ -1,6 +1,7 @@
 package net.petrikainulainen.spring.datasolr.todo.controller;
 
 import net.petrikainulainen.spring.datasolr.common.util.LocaleContextHolderWrapper;
+import net.petrikainulainen.spring.datasolr.todo.document.TodoDocument;
 import net.petrikainulainen.spring.datasolr.todo.dto.FormValidationErrorDTO;
 import net.petrikainulainen.spring.datasolr.todo.dto.TodoDTO;
 import net.petrikainulainen.spring.datasolr.todo.exception.FormValidationError;
@@ -172,6 +173,30 @@ public class TodoController {
 
     private boolean isLastFieldErrorCode(int index, String[] fieldErrorCodes) {
         return index == fieldErrorCodes.length - 1;
+    }
+
+    public List<TodoDTO> search(@RequestParam("searchTerm") String searchTerm) {
+        LOGGER.debug("Search todo entries with search term: {}", searchTerm);
+
+        List<TodoDocument> todoEntries = service.search(searchTerm);
+        LOGGER.debug("Found {} todo entries", todoEntries.size());
+
+        return createSearchResultDTOs(todoEntries);
+    }
+
+    private List<TodoDTO> createSearchResultDTOs(List<TodoDocument> todoEntries) {
+        List<TodoDTO> dtos = new ArrayList<TodoDTO>();
+
+        for (TodoDocument entry: todoEntries) {
+            TodoDTO dto = new TodoDTO();
+
+            dto.setId(Long.valueOf(entry.getId()));
+            dto.setTitle(entry.getTitle());
+
+            dtos.add(dto);
+        }
+
+        return dtos;
     }
 
     @ExceptionHandler(TodoNotFoundException.class)

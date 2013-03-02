@@ -3,6 +3,7 @@ package net.petrikainulainen.spring.datasolr.todo.controller;
 import net.petrikainulainen.spring.datasolr.common.util.LocaleContextHolderWrapper;
 import net.petrikainulainen.spring.datasolr.todo.TodoTestUtil;
 import net.petrikainulainen.spring.datasolr.todo.config.UnitTestContext;
+import net.petrikainulainen.spring.datasolr.todo.document.TodoDocument;
 import net.petrikainulainen.spring.datasolr.todo.dto.FieldValidationErrorDTO;
 import net.petrikainulainen.spring.datasolr.todo.dto.FormValidationErrorDTO;
 import net.petrikainulainen.spring.datasolr.todo.dto.TodoDTO;
@@ -49,6 +50,7 @@ public class TodoControllerTest {
 
     private static final String OBJECT_NAME = "todo";
 
+    private static final String SEARCH_TERM = "Foo";
 
     private TodoController controller;
 
@@ -220,6 +222,40 @@ public class TodoControllerTest {
         }
 
         return todos;
+    }
+
+    @Test
+    public void search() {
+        TodoDocument document = TodoTestUtil.createDocument(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
+        List<TodoDocument> documents = createDocuments(document);
+
+        when(serviceMock.search(SEARCH_TERM)).thenReturn(documents);
+
+        List<TodoDTO> results = controller.search(SEARCH_TERM);
+
+        verify(serviceMock, times(1)).search(SEARCH_TERM);
+        verifyNoMoreInteractions(serviceMock);
+
+        assertEquals(documents.size(), results.size());
+
+        for (int index = 0; index < documents.size(); index++) {
+            TodoDocument expected = documents.get(index);
+            TodoDTO actual = results.get(index);
+
+            assertEquals(Long.valueOf(expected.getId()), actual.getId());
+            assertEquals(expected.getTitle(), actual.getTitle());
+            assertNull(actual.getDescription());
+        }
+    }
+
+    private List<TodoDocument> createDocuments(TodoDocument... documents) {
+        List<TodoDocument> list = new ArrayList<TodoDocument>();
+
+        for (TodoDocument document: documents) {
+            list.add(document);
+        }
+
+        return list;
     }
 
     @Test

@@ -1,5 +1,6 @@
 package net.petrikainulainen.spring.datasolr.todo;
 
+import net.petrikainulainen.spring.datasolr.todo.document.TodoDocument;
 import net.petrikainulainen.spring.datasolr.todo.dto.TodoDTO;
 import net.petrikainulainen.spring.datasolr.todo.model.Todo;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -16,6 +17,12 @@ public class TodoTestUtil {
     public static final String TITLE_UPDATED = "updatedTitle";
 
     private static final String CHARACTER = "a";
+
+    public static TodoDocument createDocument(Long id, String description, String title) {
+        return TodoDocument.getBuilder(id, title)
+                .description(description)
+                .build();
+    }
 
     public static TodoDTO createDTO(Long id, String description, String title) {
         TodoDTO dto = new TodoDTO();
