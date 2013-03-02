@@ -1,5 +1,6 @@
 package net.petrikainulainen.spring.datasolr.todo.service;
 
+import net.petrikainulainen.spring.datasolr.todo.document.TodoDocument;
 import net.petrikainulainen.spring.datasolr.todo.dto.TodoDTO;
 import net.petrikainulainen.spring.datasolr.todo.exception.TodoNotFoundException;
 import net.petrikainulainen.spring.datasolr.todo.model.Todo;
@@ -47,4 +48,11 @@ public interface TodoService {
      * @throws TodoNotFoundException    If no to-do entry is found with the given id.
      */
     public Todo update(TodoDTO updated) throws TodoNotFoundException;
+
+    /**
+     * Searches the todo entries which title or description contains the given search term.
+     * @param searchTerm
+     * @return The list of todo entries. If matching todo entries are not found, the method returns an empty list.
+     */
+    public List<TodoDocument> search(String searchTerm);
 }

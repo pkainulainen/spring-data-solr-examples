@@ -22,6 +22,8 @@ import static org.mockito.Mockito.*;
  */
 public class RepositoryTodoServiceTest {
 
+    private static final String SEARCH_TERM = "Foo";
+
     private RepositoryTodoService service;
 
     private TodoRepository repositoryMock;
@@ -158,5 +160,14 @@ public class RepositoryTodoServiceTest {
         verify(repositoryMock, times(1)).findOne(dto.getId());
         verifyNoMoreInteractions(repositoryMock);
         verifyZeroInteractions(indexServiceMock);
+    }
+
+    @Test
+    public void search() {
+        service.search(SEARCH_TERM);
+
+        verify(indexServiceMock, times(1)).search(SEARCH_TERM);
+        verifyNoMoreInteractions(indexServiceMock);
+        verifyZeroInteractions(repositoryMock);
     }
 }

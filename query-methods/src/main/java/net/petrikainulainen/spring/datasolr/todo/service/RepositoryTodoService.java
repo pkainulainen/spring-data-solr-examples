@@ -1,5 +1,6 @@
 package net.petrikainulainen.spring.datasolr.todo.service;
 
+import net.petrikainulainen.spring.datasolr.todo.document.TodoDocument;
 import net.petrikainulainen.spring.datasolr.todo.dto.TodoDTO;
 import net.petrikainulainen.spring.datasolr.todo.exception.TodoNotFoundException;
 import net.petrikainulainen.spring.datasolr.todo.model.Todo;
@@ -86,7 +87,7 @@ public class RepositoryTodoService implements TodoService {
     @Transactional(rollbackFor = {TodoNotFoundException.class})
     @Override
     public Todo update(TodoDTO updated) throws TodoNotFoundException {
-        LOGGER.debug("Updating contact with information: {}", updated);
+        LOGGER.debug("Updating todo entry with information: {}", updated);
 
         Todo model = findById(updated.getId());
         LOGGER.debug("Found a to-do entry: {}", model);
@@ -96,5 +97,13 @@ public class RepositoryTodoService implements TodoService {
         indexService.addToIndex(model);
 
         return model;
+    }
+
+    @PreAuthorize("hasPermission('Todo', 'search'")
+    @Transactional(readOnly = true)
+    @Override
+    public List<TodoDocument> search(String searchTerm) {
+        LOGGER.debug("Search todo entries with search term: {}", searchTerm);
+        return indexService.search(searchTerm);
     }
 }
