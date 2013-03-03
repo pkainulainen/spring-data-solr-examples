@@ -16,6 +16,8 @@
     <script type="text/javascript" src="/static/js/vendor/i18next-1.5.8.js"></script>
     <script type="text/javascript" src="/static/js/vendor/underscore.js"></script>
     <script type="text/javascript" src="/static/js/vendor/backbone.js"></script>
+    <script type="text/javascript" src="/static/js/vendor/backbone.babysitter.js"></script>
+    <script type="text/javascript" src="/static/js/vendor/backbone.wreqr.js"></script>
     <script type="text/javascript" src="/static/js/vendor/Backbone.ModelBinder.js"></script>
     <script type="text/javascript" src="/static/js/vendor/handlebars-1.0.rc.1.js"></script>
     <script type="text/javascript" src="/static/js/vendor/backbone.marionette.js"></script>
