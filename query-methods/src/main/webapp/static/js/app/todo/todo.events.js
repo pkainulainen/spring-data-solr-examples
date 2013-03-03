@@ -23,6 +23,11 @@ TodoApp.vent.on("todo:deleted", function(model) {
     TodoApp.messageRegion.show(messageView);
 });
 
+TodoApp.vent.on("todo:search", function(searchTerm) {
+    window.log("Processing search event for search term: ", searchTerm);
+    Backbone.history.navigate("#/todo/search/" + searchTerm);
+})
+
 TodoApp.vent.on("todo:updated", function(model) {
     window.log("Processing todo updated event for model: ", model.toJSON());
 

@@ -66,7 +66,7 @@ TodoApp.addInitializer(function(){
 TodoApp.addInitializer(function(){
     $(".navbar").on("keypress", ".search-query", function(e) {
         if (e.keyCode == 13) {
-            Backbone.history.navigate("#/todo/search/" + $(this).val());
+            TodoApp.vent.trigger("todo:search", $(this).val());
         }
     });
 });

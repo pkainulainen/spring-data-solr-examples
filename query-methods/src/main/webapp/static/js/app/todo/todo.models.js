@@ -12,3 +12,11 @@ TodoApp.Collections.Todos = Backbone.Collection.extend({
         return "/api/todo";
     }
 })
+
+TodoApp.Collections.TodoSearchResults = Backbone.Collection.extend({
+    model: TodoApp.Models.Todo,
+
+    url: function() {
+        return "/api/todo/search?searchTerm=" + this.searchTerm;
+    }
+})
