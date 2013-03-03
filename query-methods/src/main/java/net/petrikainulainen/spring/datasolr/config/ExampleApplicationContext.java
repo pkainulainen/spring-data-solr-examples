@@ -2,7 +2,10 @@ package net.petrikainulainen.spring.datasolr.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -51,6 +54,16 @@ public class ExampleApplicationContext extends WebMvcConfigurerAdapter {
         messageSource.setUseCodeAsDefaultMessage(true);
 
         return messageSource;
+    }
+
+    @Bean
+    public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        PropertySourcesPlaceholderConfigurer properties = new PropertySourcesPlaceholderConfigurer();
+
+        properties.setLocation(new ClassPathResource( "application.properties" ));
+        properties.setIgnoreResourceNotFound(false);
+
+        return properties;
     }
 
     @Bean

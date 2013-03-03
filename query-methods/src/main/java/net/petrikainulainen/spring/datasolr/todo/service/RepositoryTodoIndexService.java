@@ -73,7 +73,7 @@ public class RepositoryTodoIndexService implements TodoIndexService {
             }
         }
 
-        LOGGER.debug("Unknown query method type. Returning empty list.");
+        LOGGER.debug("Unknown query method type: {}. Returning empty list.", queryMethodType);
         return new ArrayList<TodoDocument>();
     }
 }

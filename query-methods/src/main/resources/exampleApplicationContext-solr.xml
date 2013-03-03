@@ -6,7 +6,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/data/solr http://www.springframework.org/schema/data/solr/spring-solr.xsd">
 
-    <context:property-placeholder location="classpath:application.properties"/>
+    <context:property-placeholder location="classpath:application.properties" ignore-resource-not-found="false"/>
 
     <!-- Enable Solr repositories and configure repository base package -->
     <solr:repositories base-package="net.petrikainulainen.spring.datasolr.todo.repository.solr"/>
