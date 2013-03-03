@@ -51,7 +51,6 @@ public class RepositoryTodoIndexService implements TodoIndexService {
         repository.delete(id.toString());
     }
 
-    @Transactional
     @Override
     public List<TodoDocument> search(String searchTerm) {
         LOGGER.debug("Searching documents with search term: {}", searchTerm);

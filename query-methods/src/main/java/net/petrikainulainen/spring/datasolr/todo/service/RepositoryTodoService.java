@@ -100,7 +100,6 @@ public class RepositoryTodoService implements TodoService {
     }
 
     @PreAuthorize("hasPermission('Todo', 'search')")
-    @Transactional(readOnly = true)
     @Override
     public List<TodoDocument> search(String searchTerm) {
         LOGGER.debug("Search todo entries with search term: {}", searchTerm);
