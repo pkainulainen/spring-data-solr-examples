@@ -162,6 +162,11 @@ TodoApp.Views.UpdateTodoView = TodoApp.Views.FormView.extend({
     }
 });
 
+TodoApp.Views.TodoListView = Marionette.ItemView.extend({
+    className: "well",
+    template: "#template-todo-list-view"
+});
+
 TodoApp.Views.SearchResultView = Marionette.CompositeView.extend({
     id: "todo-list",
     initialize: function() {
@@ -172,11 +177,6 @@ TodoApp.Views.SearchResultView = Marionette.CompositeView.extend({
     itemView: TodoApp.Views.TodoListView,
     itemViewContainer: "#todo-list-items",
     template: "#template-search-results-page"
-})
-
-TodoApp.Views.TodoListView = Marionette.ItemView.extend({
-    className: "well",
-    template: "#template-todo-list-view"
 });
 
 TodoApp.Views.TodoListView = Marionette.CompositeView.extend({
