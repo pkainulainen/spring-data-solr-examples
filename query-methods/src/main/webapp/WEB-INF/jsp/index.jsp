@@ -55,16 +55,16 @@
                     </ul>
                 </div>
 
-                <div id="search-form-holder" class="hidden pull-right">
-                    <form class="navbar-search">
-                        <input type="text" class="search-query" placeholder="<spring:message code="placeholder.search.query"/>">
-                    </form>
-                </div>
-
                 <div id="logout-link-holder" class="hidden nav-collapse pull-right">
                     <ul class="nav">
                         <li><a href="#/user/logout"><spring:message code="label.logout.link"/></a></li>
                     </ul>
+                </div>
+
+                <div id="search-form-holder" class="hidden pull-right">
+                    <form class="navbar-search">
+                        <input type="text" class="search-query" placeholder="<spring:message code="placeholder.search.query"/>">
+                    </form>
                 </div>
             </div>
         </div>

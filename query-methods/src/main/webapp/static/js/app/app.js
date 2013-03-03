@@ -60,7 +60,7 @@ TodoApp.spinner = new Spinner({
 TodoApp.user = 'anonymous';
 
 TodoApp.addInitializer(function(){
-    TodoApp.getLoggedInUser(TodoApp.showLogoutLink);
+    TodoApp.getLoggedInUser(TodoApp.showLogoutLinkAndSearchForm);
 });
 
 TodoApp.getLoggedInUser = function(callback) {
@@ -85,11 +85,13 @@ TodoApp.getLoggedInUser = function(callback) {
 
 TodoApp.setUserAsAnonymous = function() {
     $("#logout-link-holder").addClass("hidden");
+    $("#search-form-holder").addClass("hidden");
     TodoApp.user = 'anonymous';
 }
 
-TodoApp.showLogoutLink = function() {
+TodoApp.showLogoutLinkAndSearchForm = function() {
     $("#logout-link-holder").removeClass("hidden");
+    $("#search-form-holder").removeClass("hidden");
 };
 
 $(document).bind('ajaxStart', function() {

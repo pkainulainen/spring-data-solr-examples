@@ -12,7 +12,7 @@ TodoApp.vent.on("user:loginFailed", function() {
 TodoApp.vent.on("user:loginSuccess", function() {
     var showTodoList = function() {
         Backbone.history.navigate("#/");
-        TodoApp.showLogoutLink();
+        TodoApp.showLogoutLinkAndSearchForm();
     }
 
     TodoApp.getLoggedInUser(showTodoList);
