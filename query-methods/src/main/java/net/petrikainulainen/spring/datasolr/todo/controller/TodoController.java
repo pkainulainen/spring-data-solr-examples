@@ -175,9 +175,9 @@ public class TodoController {
         return index == fieldErrorCodes.length - 1;
     }
 
-    @RequestMapping(value = "/api/todo/search", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/todo/search/{searchTerm}", method = RequestMethod.GET)
     @ResponseBody
-    public List<TodoDTO> search(@RequestParam("searchTerm") String searchTerm) {
+    public List<TodoDTO> search(@PathVariable("searchTerm") String searchTerm) {
         LOGGER.debug("Search todo entries with search term: {}", searchTerm);
 
         List<TodoDocument> todoEntries = service.search(searchTerm);

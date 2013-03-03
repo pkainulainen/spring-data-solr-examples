@@ -167,7 +167,7 @@ TodoApp.Views.SearchResultView = Marionette.CompositeView.extend({
     initialize: function() {
         this.collection = new TodoApp.Collections.TodoSearchResults();
         this.collection.searchTerm = this.options.searchTerm;
-        //this.collection.fetch();
+        this.collection.fetch();
     },
     itemView: TodoApp.Views.TodoListView,
     itemViewContainer: "#todo-list-items",
