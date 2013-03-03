@@ -99,7 +99,7 @@ public class RepositoryTodoService implements TodoService {
         return model;
     }
 
-    @PreAuthorize("hasPermission('Todo', 'search'")
+    @PreAuthorize("hasPermission('Todo', 'search')")
     @Transactional(readOnly = true)
     @Override
     public List<TodoDocument> search(String searchTerm) {
