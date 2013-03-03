@@ -6,6 +6,7 @@ TodoApp.TodoRouting = function(){
             "todo/add": "add",
             "todo/:id": "view",
             "todo/update/:id": "update",
+            "todo/search/:searchTerm": "search",
             "": "list"
         }
     });

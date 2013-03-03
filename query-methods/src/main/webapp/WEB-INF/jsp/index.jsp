@@ -135,6 +135,14 @@
     </div>
 </script>
 
+<!-- Search results View -->
+<script id="template-search-results-page" type="text/x-handlebars-template">
+    <h1><spring:message code="label.search.results.title"/></h1>
+    <div id="todo-list-items" class="page-content">
+
+    </div>
+</script>
+
 <!-- Update Todo View -->
 <script id="template-update-todo-view" type="text/x-handlebars-template">
     <h1><spring:message code="label.todo.update.page.title"/></h1>

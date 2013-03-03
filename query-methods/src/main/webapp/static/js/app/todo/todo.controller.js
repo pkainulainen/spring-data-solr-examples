@@ -2,7 +2,7 @@ TodoApp.Controllers.TodoController = {
     add: function() {
         window.log("Rendering add todo view.");
         if (this.isAnonymousUser()) {
-            TodoApp.vent.trigger("user:login")
+            TodoApp.vent.trigger("user:login");
         }
         else {
             var addTodoView = new TodoApp.Views.AddTodoView();
@@ -12,7 +12,7 @@ TodoApp.Controllers.TodoController = {
     view: function(id) {
         window.log("Rendering view page for todo entry with id: ", id);
         if (this.isAnonymousUser()) {
-            TodoApp.vent.trigger("user:login")
+            TodoApp.vent.trigger("user:login");
         }
         else {
             var viewTodoView = new TodoApp.Views.ViewTodoView({id: id});
@@ -22,7 +22,7 @@ TodoApp.Controllers.TodoController = {
     list: function() {
         window.log("Rendering todo list view.");
         if (this.isAnonymousUser()) {
-            TodoApp.vent.trigger("user:login")
+            TodoApp.vent.trigger("user:login");
         }
         else {
             var todoPageView = new TodoApp.Views.TodoListView();
@@ -39,11 +39,21 @@ TodoApp.Controllers.TodoController = {
     update: function(id) {
         window.log("Rendering update todo view.")
         if (this.isAnonymousUser()) {
-            TodoApp.vent.trigger("user:login")
+            TodoApp.vent.trigger("user:login");
         }
         else {
             var updateTodoView = new TodoApp.Views.UpdateTodoView({id: id});
             TodoApp.mainRegion.show(updateTodoView);
+        }
+    },
+    search: function(searchTerm) {
+        window.log("Searching todo entries with search term:", searchTerm);
+        if (this.isAnonymousUser()) {
+            TodoApp.vent.trigger("user:login");
+        }
+        else {
+            var searchResultView = new TodoApp.Views.SearchResultView({searchTerm: searchTerm});
+            TodoApp.mainRegion.show(searchResultView);
         }
     }
 };

@@ -162,6 +162,19 @@ TodoApp.Views.UpdateTodoView = TodoApp.Views.FormView.extend({
     }
 });
 
+TodoApp.Views.SearchResultView = Marionette.CompositeView.extend({
+    id: "todo-list",
+    initialize: function() {
+        var url = "/api/todo/search?searchTerm=" + this.options.searchTerm;
+        $.getJSON(url, function(searchResults) {
+            this.collection = new TodoApp.Collections.Todos(searchResults);
+        });
+    },
+    itemView: TodoApp.Views.TodoListView,
+    itemViewContainer: "#todo-list-items",
+    template: "#template-search-results-page"
+})
+
 TodoApp.Views.TodoListView = Marionette.ItemView.extend({
     className: "well",
     template: "#template-todo-list-view"
