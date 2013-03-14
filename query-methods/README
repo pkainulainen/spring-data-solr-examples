@@ -1,6 +1,8 @@
 This is an example application of my following blog entries:
 
 - Spring Data Solr Tutorial: Configuration - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-configuration/
+- Spring Data Solr Tutorial: CRUD (Almost) - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-crud-almost/
+- Spring Data Solr Tutorial: Query Methods - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-query-methods/
 
 NOTE: Only the functions described in the blog entries mentioned above are working at the moment.
 
@@ -18,6 +20,5 @@ RUNNING THE APPLICATION:
 RUNNING TESTS:
 
 - You can run unit tests by using this command: mvn test -P dev
-- The integration tests are not working at the moment but they would work, you could run them by
-  using a command: mvn verify -P integration-test
+- You can run integration tests by using a command: mvn verify -P integration-test
 
