@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {ExampleApplicationContext.class, TestSolrContext.class})
-//@ContextConfiguration(locations = {"classpath:exampleApplicationContext.xml"})
+//@ContextConfiguration(locations = {"classpath:exampleApplicationContext.xml", "classpath:exampleApplicationContext-test.xml"})
 @WebAppConfiguration
 public class ITHomeControllerTest {
 
