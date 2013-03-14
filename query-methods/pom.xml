@@ -68,7 +68,7 @@
     </profiles>
 
     <build>
-        <finalName>spring-test-mvc-configuration</finalName>
+        <finalName>spring-data-solr-query-methods</finalName>
         <filters>
             <filter>profiles/${build.profile.id}/config.properties</filter>
         </filters>
