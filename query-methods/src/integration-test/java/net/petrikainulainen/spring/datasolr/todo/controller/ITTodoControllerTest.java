@@ -5,6 +5,7 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import net.petrikainulainen.spring.datasolr.config.ExampleApplicationContext;
+import net.petrikainulainen.spring.datasolr.config.TestSolrContext;
 import net.petrikainulainen.spring.datasolr.todo.TodoTestUtil;
 import net.petrikainulainen.spring.datasolr.todo.dto.TodoDTO;
 import net.petrikainulainen.spring.datasolr.todo.model.Todo;
@@ -40,7 +41,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @author Petri Kainulainen
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {ExampleApplicationContext.class})
+@ContextConfiguration(classes = {ExampleApplicationContext.class, TestSolrContext.class})
 //@ContextConfiguration(locations = {"classpath:exampleApplicationContext.xml"})
 @WebAppConfiguration
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,

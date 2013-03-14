@@ -2,6 +2,7 @@ package net.petrikainulainen.spring.datasolr.user.controller;
 
 import net.petrikainulainen.spring.datasolr.IntegrationTestUtil;
 import net.petrikainulainen.spring.datasolr.config.ExampleApplicationContext;
+import net.petrikainulainen.spring.datasolr.config.TestSolrContext;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @author Petri Kainulainen
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {ExampleApplicationContext.class})
+@ContextConfiguration(classes = {ExampleApplicationContext.class, TestSolrContext.class})
 //@ContextConfiguration(locations = {"classpath:exampleApplicationContext.xml"})
 @WebAppConfiguration
 public class ITUserControllerTest {
