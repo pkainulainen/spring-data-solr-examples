@@ -57,6 +57,12 @@ public class RepositoryTodoIndexService implements TodoIndexService {
         return findDocuments(searchTerm);
     }
 
+    @Override
+    public void update(Todo todoEntry) {
+        LOGGER.debug("Updating the information of a todo entry: {}", todoEntry);
+        repository.update(todoEntry);
+    }
+
     private List<TodoDocument> findDocuments(String searchTerm) {
         if (queryMethodType != null) {
             if (queryMethodType.equals(QUERY_METHOD_METHOD_NAME)) {

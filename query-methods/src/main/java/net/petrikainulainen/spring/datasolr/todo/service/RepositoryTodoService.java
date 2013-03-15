@@ -94,7 +94,7 @@ public class RepositoryTodoService implements TodoService {
 
         model.update(updated.getDescription(), updated.getTitle());
 
-        indexService.addToIndex(model);
+        indexService.update(model);
 
         return model;
     }

@@ -142,7 +142,7 @@ public class RepositoryTodoServiceTest {
         verify(repositoryMock, times(1)).findOne(dto.getId());
         verifyNoMoreInteractions(repositoryMock);
 
-        verify(indexServiceMock, times(1)).addToIndex(model);
+        verify(indexServiceMock, times(1)).update(model);
         verifyNoMoreInteractions(indexServiceMock);
 
         assertEquals(dto.getId(), actual.getId());

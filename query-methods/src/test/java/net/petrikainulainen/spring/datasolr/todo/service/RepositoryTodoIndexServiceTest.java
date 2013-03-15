@@ -106,4 +106,14 @@ public class RepositoryTodoIndexServiceTest {
         verifyZeroInteractions(repositoryMock);
         assertTrue(todos.isEmpty());
     }
+
+    @Test
+    public void update() {
+        Todo todoEntry = TodoTestUtil.createModel(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
+
+        service.update(todoEntry);
+
+        verify(repositoryMock, times(1)).update(todoEntry);
+        verifyNoMoreInteractions(repositoryMock);
+    }
 }

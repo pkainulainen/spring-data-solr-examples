@@ -9,6 +9,10 @@ import org.springframework.data.annotation.Id;
  */
 public class TodoDocument {
 
+    public static final String FIELD_DESCRIPTION = "description";
+    public static final String FIELD_ID = "id";
+    public static final String FIELD_TITLE = "title";
+
     @Id
     @Field
     private String id;

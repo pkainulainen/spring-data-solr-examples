@@ -15,4 +15,6 @@ public interface TodoIndexService {
     public void deleteFromIndex(Long id);
 
     public List<TodoDocument> search(String searchTerm);
+
+    public void update(Todo todoEntry);
 }

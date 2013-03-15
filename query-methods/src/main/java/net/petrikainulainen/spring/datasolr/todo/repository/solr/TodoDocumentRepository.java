@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Petri Kainulainen
  */
-public interface TodoDocumentRepository extends SolrCrudRepository<TodoDocument, String> {
+public interface TodoDocumentRepository extends PartialUpdateRepository, SolrCrudRepository<TodoDocument, String> {
 
     public List<TodoDocument> findByTitleContainsOrDescriptionContains(String title, String description);
 
