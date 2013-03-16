@@ -57,6 +57,7 @@ public class RepositoryTodoIndexService implements TodoIndexService {
         return findDocuments(searchTerm);
     }
 
+    @Transactional
     @Override
     public void update(Todo todoEntry) {
         LOGGER.debug("Updating the information of a todo entry: {}", todoEntry);
