@@ -3,6 +3,7 @@ This is an example application of my following blog entries:
 - Spring Data Solr Tutorial: Configuration - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-configuration/
 - Spring Data Solr Tutorial: CRUD (Almost) - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-crud-almost/
 - Spring Data Solr Tutorial: Query Methods - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-query-methods/
+- Spring Data Solr Tutorial: Adding Custom Methods to a Single Repository - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-adding-custom-methods-to-a-single-repository/
 
 NOTE: Only the functions described in the blog entries mentioned above are working at the moment.
 
