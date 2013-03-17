@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
@@ -35,7 +36,7 @@ public class RepositoryTodoIndexServiceTest {
     }
 
     @Test
-    public void addToIndex() {
+    public void addToIndex_ShouldCreateNewDocument_ToIndex() {
         Todo todoEntry = TodoTestUtil.createModel(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
 
         service.addToIndex(todoEntry);
@@ -52,7 +53,7 @@ public class RepositoryTodoIndexServiceTest {
     }
 
     @Test
-    public void deleteFromIndex() {
+    public void deleteFromIndex_ShouldDeleteDocumentFromIndex() {
         service.deleteFromIndex(1L);
 
         verify(repositoryMock, times(1)).delete("1");
@@ -60,37 +61,52 @@ public class RepositoryTodoIndexServiceTest {
     }
 
     @Test
-    public void searchWhenQueryGenerationFromMethodNameIsUsed() {
+    public void search_QueryGenerationFromMethodNameIsUsed_ShouldReturnTodoDocuments() {
         ReflectionTestUtils.setField(service, "queryMethodType", RepositoryTodoIndexService.QUERY_METHOD_METHOD_NAME);
 
-        service.search(SEARCH_TERM);
+        List<TodoDocument> expected = new ArrayList<TodoDocument>();
+        when(repositoryMock.findByTitleContainsOrDescriptionContains(SEARCH_TERM, SEARCH_TERM)).thenReturn(expected);
+
+        List<TodoDocument> actual = service.search(SEARCH_TERM);
 
         verify(repositoryMock, times(1)).findByTitleContainsOrDescriptionContains(SEARCH_TERM, SEARCH_TERM);
         verifyNoMoreInteractions(repositoryMock);
+
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void searchWhenNamedQueryIsUsed() {
+    public void search_NamedQueryIsUsed_ShouldReturnTodoDocuments() {
         ReflectionTestUtils.setField(service, "queryMethodType", RepositoryTodoIndexService.QUERY_METHOD_NAMED_QUERY);
 
-        service.search(SEARCH_TERM);
+        List<TodoDocument> expected = new ArrayList<TodoDocument>();
+        when(repositoryMock.findByNamedQuery(SEARCH_TERM)).thenReturn(expected);
+
+        List<TodoDocument> actual = service.search(SEARCH_TERM);
 
         verify(repositoryMock, times(1)).findByNamedQuery(SEARCH_TERM);
         verifyNoMoreInteractions(repositoryMock);
+
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void searchWhenQueryAnnotationIsUsed() {
+    public void search_QueryAnnotationIsUsed_ShouldReturnTodoDocuments() {
         ReflectionTestUtils.setField(service, "queryMethodType", RepositoryTodoIndexService.QUERY_METHOD_QUERY_ANNOTATION);
 
-        service.search(SEARCH_TERM);
+        List<TodoDocument> expected = new ArrayList<TodoDocument>();
+        when(repositoryMock.findByQueryAnnotation(SEARCH_TERM)).thenReturn(expected);
+
+        List<TodoDocument> actual = service.search(SEARCH_TERM);
 
         verify(repositoryMock, times(1)).findByQueryAnnotation(SEARCH_TERM);
         verifyNoMoreInteractions(repositoryMock);
+
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void searchWhenQueryMethodTypeIsUnknown() {
+    public void search_QueryMethodTypeIsUnknown_ShouldReturnEmptyList() {
         ReflectionTestUtils.setField(service, "queryMethodType", "unknown");
 
         List<TodoDocument> todos = service.search(SEARCH_TERM);
@@ -100,7 +116,7 @@ public class RepositoryTodoIndexServiceTest {
     }
 
     @Test
-    public void searchWhenQueryMethodTypeIsNotSet() {
+    public void search_QueryMethodTypeIsNotSet_ShouldReturnEmptyList() {
         List<TodoDocument> todos = service.search(SEARCH_TERM);
 
         verifyZeroInteractions(repositoryMock);
@@ -108,7 +124,7 @@ public class RepositoryTodoIndexServiceTest {
     }
 
     @Test
-    public void update() {
+    public void update_ExistingTodo_ShouldUpdateDocument() {
         Todo todoEntry = TodoTestUtil.createModel(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
 
         service.update(todoEntry);

@@ -1,6 +1,7 @@
 package net.petrikainulainen.spring.datasolr.todo.service;
 
 import net.petrikainulainen.spring.datasolr.todo.TodoTestUtil;
+import net.petrikainulainen.spring.datasolr.todo.document.TodoDocument;
 import net.petrikainulainen.spring.datasolr.todo.dto.TodoDTO;
 import net.petrikainulainen.spring.datasolr.todo.exception.TodoNotFoundException;
 import net.petrikainulainen.spring.datasolr.todo.model.Todo;
@@ -42,7 +43,7 @@ public class RepositoryTodoServiceTest {
     }
 
     @Test
-    public void add() {
+    public void add_NewTodo_ShouldSaveTodo() {
         TodoDTO dto = TodoTestUtil.createDTO(null, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
 
         Todo persisted = TodoTestUtil.createModel(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
@@ -65,7 +66,7 @@ public class RepositoryTodoServiceTest {
     }
 
     @Test
-    public void deleteById() throws TodoNotFoundException {
+    public void deleteById_TodoIsFound_ShouldReturnDeletedTodo() throws TodoNotFoundException {
         Todo model = TodoTestUtil.createModel(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
         when(repositoryMock.findOne(TodoTestUtil.ID)).thenReturn(model);
 
@@ -82,7 +83,7 @@ public class RepositoryTodoServiceTest {
     }
 
     @Test(expected = TodoNotFoundException.class)
-    public void deleteByIdWhenToDoIsNotFound() throws TodoNotFoundException {
+    public void deleteById_ToDoIsNotFound_ShouldThrowException() throws TodoNotFoundException {
         when(repositoryMock.findOne(TodoTestUtil.ID)).thenReturn(null);
 
         service.deleteById(TodoTestUtil.ID);
@@ -93,7 +94,7 @@ public class RepositoryTodoServiceTest {
     }
 
     @Test
-    public void findAll() {
+    public void findAll_ShouldReturnTodoList() {
         List<Todo> models = new ArrayList<Todo>();
         when(repositoryMock.findAll()).thenReturn(models);
 
@@ -107,7 +108,7 @@ public class RepositoryTodoServiceTest {
     }
 
     @Test
-    public void findById() throws TodoNotFoundException {
+    public void findById_TodoIsFound_ShouldReturnTodo() throws TodoNotFoundException {
         Todo model = TodoTestUtil.createModel(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
         when(repositoryMock.findOne(TodoTestUtil.ID)).thenReturn(model);
 
@@ -121,7 +122,7 @@ public class RepositoryTodoServiceTest {
     }
 
     @Test(expected = TodoNotFoundException.class)
-    public void findByIdWhenToDoIsNotFound() throws TodoNotFoundException {
+    public void findById_ToDoIsNotFound_ShouldThrowException() throws TodoNotFoundException {
         when(repositoryMock.findOne(TodoTestUtil.ID)).thenReturn(null);
 
         service.findById(TodoTestUtil.ID);
@@ -132,7 +133,7 @@ public class RepositoryTodoServiceTest {
     }
 
     @Test
-    public void update() throws TodoNotFoundException {
+    public void update_TodoFound_ShouldReturnUpdatedTodo() throws TodoNotFoundException {
         TodoDTO dto = TodoTestUtil.createDTO(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION_UPDATED, TodoTestUtil.TITLE_UPDATED);
         Todo model = TodoTestUtil.createModel(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
         when(repositoryMock.findOne(dto.getId())).thenReturn(model);
@@ -151,7 +152,7 @@ public class RepositoryTodoServiceTest {
     }
 
     @Test(expected = TodoNotFoundException.class)
-    public void updateWhenToDoIsNotFound() throws TodoNotFoundException {
+    public void update_ToDoIsNotFound_ShouldThrowException() throws TodoNotFoundException {
         TodoDTO dto = TodoTestUtil.createDTO(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION_UPDATED, TodoTestUtil.TITLE_UPDATED);
         when(repositoryMock.findOne(dto.getId())).thenReturn(null);
 
@@ -163,11 +164,16 @@ public class RepositoryTodoServiceTest {
     }
 
     @Test
-    public void search() {
-        service.search(SEARCH_TERM);
+    public void search_ShouldReturnTodoDocuments() {
+        List<TodoDocument> expected = new ArrayList<TodoDocument>();
+        when(indexServiceMock.search(SEARCH_TERM)).thenReturn(expected);
+
+        List<TodoDocument> actual = service.search(SEARCH_TERM);
 
         verify(indexServiceMock, times(1)).search(SEARCH_TERM);
         verifyNoMoreInteractions(indexServiceMock);
         verifyZeroInteractions(repositoryMock);
+
+        assertEquals(expected, actual);
     }
 }

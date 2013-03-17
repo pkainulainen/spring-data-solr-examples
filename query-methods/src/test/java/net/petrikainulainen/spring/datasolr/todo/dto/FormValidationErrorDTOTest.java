@@ -15,7 +15,7 @@ public class FormValidationErrorDTOTest {
     private static final String ERROR_MESSAGE = "bar";
 
     @Test
-    public void addFieldError() {
+    public void addFieldError_ShouldAddNewFieldError() {
         FormValidationErrorDTO dto = new FormValidationErrorDTO();
 
         dto.addFieldError(FIELD_PATH, ERROR_MESSAGE);

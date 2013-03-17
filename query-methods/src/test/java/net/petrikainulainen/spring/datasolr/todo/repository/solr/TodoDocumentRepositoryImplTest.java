@@ -37,7 +37,7 @@ public class TodoDocumentRepositoryImplTest {
     }
 
     @Test
-    public void update() {
+    public void update_ExistingDocument_ShouldDoPartialUpdate() {
         Todo todoEntry = TodoTestUtil.createModel(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
 
         repository.update(todoEntry);

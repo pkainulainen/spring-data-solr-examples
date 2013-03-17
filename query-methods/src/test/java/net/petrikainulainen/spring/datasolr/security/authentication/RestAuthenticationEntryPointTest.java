@@ -26,7 +26,7 @@ public class RestAuthenticationEntryPointTest {
     }
 
     @Test
-    public void commence() throws IOException, ServletException {
+    public void commence_ShouldSetResponseStatusToUnauthorized() throws IOException, ServletException {
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
         AuthenticationException ex = new AuthenticationCredentialsNotFoundException("");

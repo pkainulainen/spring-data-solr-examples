@@ -16,7 +16,7 @@ public class TodoDocumentTest {
     private static final String TITLE = "title";
 
     @Test
-    public void buildWithMandatoryValues() {
+    public void build_IdAndTitleAreGiven_ShouldBuildObject() {
         TodoDocument document = TodoDocument.getBuilder(ID, TITLE).build();
 
         assertEquals(ID_AS_STRING, document.getId());
@@ -25,7 +25,7 @@ public class TodoDocumentTest {
     }
 
     @Test
-    public void buildWithAllValues() {
+    public void build_AllValuesAreGiven_ShouldBuildObject() {
         TodoDocument document = TodoDocument.getBuilder(ID, TITLE)
                 .description(DESCRIPTION)
                 .build();

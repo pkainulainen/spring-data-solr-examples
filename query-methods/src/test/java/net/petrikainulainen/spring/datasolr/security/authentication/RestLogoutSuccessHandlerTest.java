@@ -26,7 +26,7 @@ public class RestLogoutSuccessHandlerTest {
     }
 
     @Test
-    public void onLogoutSuccess() throws IOException, ServletException {
+    public void onLogoutSuccess_ShouldSetStatusToOk() throws IOException, ServletException {
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
         Authentication authentication = new TestingAuthenticationToken(null, null);

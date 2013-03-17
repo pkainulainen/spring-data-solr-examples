@@ -25,7 +25,7 @@ public class RestAuthenticationSuccessHandlerTest {
     }
 
     @Test
-    public void onAuthenticationSuccess() throws ServletException, IOException {
+    public void onAuthenticationSuccess_ShouldSetResponseStatusToOk() throws ServletException, IOException {
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
         Authentication authentication = new TestingAuthenticationToken(null, null);

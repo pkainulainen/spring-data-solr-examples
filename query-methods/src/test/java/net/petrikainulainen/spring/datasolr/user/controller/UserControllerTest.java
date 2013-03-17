@@ -40,7 +40,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getLoggedInUser() {
+    public void getLoggedInUser_UserIsLoggedIn_ShouldReturnUser() {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         authorities.add(AUTHORITY);
 
@@ -58,7 +58,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getLoggedInUSerWhenUserIsNotLoggedIn() {
+    public void getLoggedInUser_UserIsNotLoggedIn_ShouldReturnNull() {
         when(securityContextUtilMock.getPrincipal()).thenReturn(null);
 
         UserDTO loggedInUser = controller.getLoggedInUser();

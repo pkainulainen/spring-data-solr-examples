@@ -18,7 +18,7 @@ public class HomeControllerTest {
     }
 
     @Test
-    public void showHomePage() {
+    public void showHomePage_ShouldReturnHomeView() {
         String view = controller.showHomePage();
         assertEquals(HomeController.HOME_VIEW, view);
     }

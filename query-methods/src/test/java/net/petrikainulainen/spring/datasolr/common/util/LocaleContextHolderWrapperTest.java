@@ -29,7 +29,7 @@ public class LocaleContextHolderWrapperTest {
     }
 
     @Test
-    public void getCurrentLocale() {
+    public void getCurrentLocale_ShouldReturnCorrectLocale() {
         PowerMockito.mockStatic(LocaleContextHolder.class);
         when(LocaleContextHolder.getLocale()).thenReturn(Locale.US);
 

@@ -43,35 +43,35 @@ public class TodoPermissionEvaluatorTest {
     }
 
     @Test
-    public void hasPermissionWhenUserIsAnonymous() {
+    public void hasPermission_AnonymousUser_ShouldReturnFalse() {
         Authentication anonymous = createAuthenticationForAnonymousUser();
         boolean hasPermission = permissionEvaluator.hasPermission(anonymous, DOMAIN_OBJECT_TODO, PERMISSION_ADD);
         assertFalse(hasPermission);
     }
 
     @Test
-    public void hasPermissionWhenUserIsLoggedInAndTargetDomainObjectIsUnknown() {
+    public void hasPermission_UserIsLoggedInAndTargetDomainObjectIsUnknown_ShouldReturnFalse() {
         Authentication loggedInUser = createAuthenticationForLoggedInUser(SecurityRole.ROLE_USER.name());
         boolean hasPermission = permissionEvaluator.hasPermission(loggedInUser, new Todo(), PERMISSION_ADD);
         assertFalse(hasPermission);
     }
 
     @Test
-    public void hasPermissionWhenUserIsLoggedInButHasUnknownRole() {
+    public void hasPermission_UserIsLoggedInButHasUnknownRole_ShouldReturnFalse() {
         Authentication loggedInUser = createAuthenticationForLoggedInUser(ROLE_UNKNOWN);
         boolean hasPermission = permissionEvaluator.hasPermission(loggedInUser, DOMAIN_OBJECT_TODO, PERMISSION_ADD);
         assertFalse(hasPermission);
     }
 
     @Test
-    public void hasPermissionWhenUserIsLoggedIn() {
+    public void hasPermission_UserIsLoggedIn_ShouldReturnTrue() {
         Authentication loggedInUser = createAuthenticationForLoggedInUser(SecurityRole.ROLE_USER.name());
         boolean hasPermission = permissionEvaluator.hasPermission(loggedInUser, DOMAIN_OBJECT_TODO, PERMISSION_ADD);
         assertTrue(hasPermission);
     }
 
     @Test
-    public void hasPermissionNotImplemented() {
+    public void hasPermission_MethodNotImplemented_ShouldReturnFalse() {
         Authentication loggedInUser = createAuthenticationForLoggedInUser(SecurityRole.ROLE_USER.name());
         boolean hasPermission = permissionEvaluator.hasPermission(loggedInUser, TARGET_ID, DOMAIN_OBJECT_TODO, PERMISSION_ADD);
         assertFalse(hasPermission);

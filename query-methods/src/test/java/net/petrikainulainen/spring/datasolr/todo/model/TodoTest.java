@@ -13,7 +13,7 @@ public class TodoTest {
     private String DESCRIPTION = "description";
 
     @Test
-    public void buildWithMandatoryInformation() {
+    public void build_MandatoryInformationIsSet_ShouldCreateObject() {
         Todo built = Todo.getBuilder(TITLE).build();
 
         assertNull(built.getId());
@@ -25,7 +25,7 @@ public class TodoTest {
     }
 
     @Test
-    public void buildWithAllInformation() {
+    public void build_AllInformationSet_ShouldCreateObject() {
         Todo built = Todo.getBuilder(TITLE)
                 .description(DESCRIPTION)
                 .build();
@@ -39,7 +39,7 @@ public class TodoTest {
     }
 
     @Test
-    public void prePersist() {
+    public void prePersist_NewTodo_ShouldUpdateCreationTimeAndModificationTime() {
         Todo todo = new Todo();
         todo.prePersist();
 
@@ -53,7 +53,7 @@ public class TodoTest {
     }
 
     @Test
-    public void preUpdate() {
+    public void preUpdate_ExistingTodo_ShouldUpdateModificationTime() {
         Todo todo = new Todo();
         todo.prePersist();
 

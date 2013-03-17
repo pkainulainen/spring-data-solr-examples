@@ -80,7 +80,7 @@ public class TodoControllerTest {
     }
 
     @Test
-    public void add() throws FormValidationError {
+    public void add_AllFieldsOk_ShouldReturnAddedTodo() throws FormValidationError {
         TodoDTO dto = TodoTestUtil.createDTO(null, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
         Todo expected = TodoTestUtil.createModel(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
         when(serviceMock.add(dto)).thenReturn(expected);
@@ -95,7 +95,7 @@ public class TodoControllerTest {
     }
 
     @Test(expected = FormValidationError.class)
-    public void addEmptyTodo() throws FormValidationError {
+    public void add_EmptyTodo_ShouldThrowException() throws FormValidationError {
         TodoDTO dto = TodoTestUtil.createDTO(null, "", "");
 
         controller.add(dto);
@@ -104,7 +104,7 @@ public class TodoControllerTest {
     }
 
     @Test(expected = FormValidationError.class)
-    public void addTodoWhenTitleAndDescriptionAreTooLong() throws FormValidationError {
+    public void add_TitleAndDescriptionAreTooLong_ShouldThrowException() throws FormValidationError {
         String description = TodoTestUtil.createStringWithLength(Todo.MAX_LENGTH_DESCRIPTION + 1);
         String title = TodoTestUtil.createStringWithLength(Todo.MAX_LENGTH_TITLE + 1);
 
@@ -116,7 +116,7 @@ public class TodoControllerTest {
     }
 
     @Test
-    public void deleteById() throws TodoNotFoundException {
+    public void deleteById_TodoIsNotFound_ShouldReturnDeletedTodo() throws TodoNotFoundException {
         Todo expected = TodoTestUtil.createModel(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
         when(serviceMock.deleteById(TodoTestUtil.ID)).thenReturn(expected);
 
@@ -130,7 +130,7 @@ public class TodoControllerTest {
     }
 
     @Test(expected = TodoNotFoundException.class)
-    public void deleteByIdWhenTodoIsNotFound() throws TodoNotFoundException {
+    public void deleteById_TodoIsNotFound_ShouldThrowException() throws TodoNotFoundException {
         when(serviceMock.deleteById(TodoTestUtil.ID)).thenThrow(new TodoNotFoundException(""));
 
         controller.deleteById(TodoTestUtil.ID);
@@ -141,7 +141,7 @@ public class TodoControllerTest {
     }
 
     @Test
-    public void findAll() {
+    public void findAll_ShouldReturnTodoList() {
         Todo model = TodoTestUtil.createModel(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
         List<Todo> expected = createModels(model);
 
@@ -157,7 +157,7 @@ public class TodoControllerTest {
     }
 
     @Test
-    public void update() throws FormValidationError, TodoNotFoundException {
+    public void update_AllFieldsOk_ShouldReturnUpdatedTodo() throws FormValidationError, TodoNotFoundException {
         TodoDTO dto = TodoTestUtil.createDTO(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION_UPDATED, TodoTestUtil.TITLE_UPDATED);
         Todo expected = TodoTestUtil.createModel(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
         when(serviceMock.update(dto)).thenReturn(expected);
@@ -172,7 +172,7 @@ public class TodoControllerTest {
     }
 
     @Test(expected = FormValidationError.class)
-    public void updateEmptyTodo() throws FormValidationError, TodoNotFoundException {
+    public void update_EmptyTodo_ShouldThrowException() throws FormValidationError, TodoNotFoundException {
         TodoDTO dto = TodoTestUtil.createDTO(TodoTestUtil.ID, "", "");
 
         controller.update(dto, TodoTestUtil.ID);
@@ -181,7 +181,7 @@ public class TodoControllerTest {
     }
 
     @Test(expected = FormValidationError.class)
-    public void updateTodoWhenTitleAndDescriptionAreTooLong() throws FormValidationError, TodoNotFoundException {
+    public void update_TitleAndDescriptionAreTooLong_ShouldThrowException() throws FormValidationError, TodoNotFoundException {
         String description = TodoTestUtil.createStringWithLength(Todo.MAX_LENGTH_DESCRIPTION + 1);
         String title = TodoTestUtil.createStringWithLength(Todo.MAX_LENGTH_TITLE + 1);
 
@@ -193,7 +193,7 @@ public class TodoControllerTest {
     }
 
     @Test(expected = TodoNotFoundException.class)
-    public void updateWhenTodoIsNotFound() throws FormValidationError, TodoNotFoundException {
+    public void update_TodoIsNotFound_ShouldThrowException() throws FormValidationError, TodoNotFoundException {
         TodoDTO dto = TodoTestUtil.createDTO(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
         when(serviceMock.update(dto)).thenThrow(new TodoNotFoundException(""));
 
@@ -225,7 +225,7 @@ public class TodoControllerTest {
     }
 
     @Test
-    public void search() {
+    public void search_ShouldReturnTodoList() {
         TodoDocument document = TodoTestUtil.createDocument(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
         List<TodoDocument> documents = createDocuments(document);
 
@@ -259,7 +259,7 @@ public class TodoControllerTest {
     }
 
     @Test
-    public void findById() throws TodoNotFoundException {
+    public void findById_TodoIsFound_ShouldReturnTodo() throws TodoNotFoundException {
         Todo expected = TodoTestUtil.createModel(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
         when(serviceMock.findById(TodoTestUtil.ID)).thenReturn(expected);
 
@@ -273,7 +273,7 @@ public class TodoControllerTest {
     }
 
     @Test(expected = TodoNotFoundException.class)
-    public void findByIdWhenTodoIsNotFound() throws TodoNotFoundException {
+    public void findById_TodoIsNotFound_ShouldThrowException() throws TodoNotFoundException {
         when(serviceMock.findById(TodoTestUtil.ID)).thenThrow(new TodoNotFoundException(""));
 
         controller.findById(TodoTestUtil.ID);
@@ -284,7 +284,7 @@ public class TodoControllerTest {
     }
 
     @Test
-    public void handleFormValidationError() {
+    public void handleFormValidationError_AllMessagesFound_ShouldReturnFormValidationErrors() {
         FieldError titleError = createFieldError(OBJECT_NAME, FIELD_TITLE, ERROR_MESSAGE_CODE_EMPTY_TODO_TITLE);
         FieldError descriptionError = createFieldError(OBJECT_NAME, FIELD_DESCRIPTION, ERROR_MESSAGE_CODE_TOO_LONG_DESCRIPTION);
 
@@ -324,7 +324,7 @@ public class TodoControllerTest {
     }
 
     @Test
-    public void handleFormValidationErrorWhenErrorMessageIsNotFoundWithFirstErrorCode() {
+    public void handleFormValidationError_ErrorMessageIsNotFoundWithFirstErrorCode_ShouldReturnFormValidationError() {
         FieldError titleError = createFieldError(OBJECT_NAME, FIELD_TITLE, ERROR_MESSAGE_CODE_EMPTY_TITLE, ERROR_MESSAGE_CODE_EMPTY_TODO_TITLE);
 
         List<FieldError> errors = new ArrayList<FieldError>();
@@ -358,7 +358,7 @@ public class TodoControllerTest {
     }
 
     @Test
-    public void handleFormValidationErrorWhenErrorMessagesAreNotFound() {
+    public void handleFormValidationError_ErrorMessagesAreNotFound_ShouldReturnFormValidationError() {
         FieldError titleError = createFieldError(OBJECT_NAME, FIELD_TITLE, ERROR_MESSAGE_CODE_EMPTY_TODO_TITLE);
         FieldError descriptionError = createFieldError(OBJECT_NAME, FIELD_DESCRIPTION, ERROR_MESSAGE_CODE_TOO_LONG_DESCRIPTION);
 
@@ -398,7 +398,7 @@ public class TodoControllerTest {
     }
 
     @Test
-    public void handleFormValidationErrorWhenErrorMessagesAreNull() {
+    public void handleFormValidationError_ErrorMessagesAreNull_ShouldReturnFormValidationErrorWitNullErrorMessages() {
         FieldError titleError = createFieldError(OBJECT_NAME, FIELD_TITLE, ERROR_MESSAGE_CODE_EMPTY_TODO_TITLE);
         FieldError descriptionError = createFieldError(OBJECT_NAME, FIELD_DESCRIPTION, ERROR_MESSAGE_CODE_TOO_LONG_DESCRIPTION);
 
@@ -443,7 +443,7 @@ public class TodoControllerTest {
         assertEquals(expected.getTitle(), actual.getTitle());
     }
 
-    public FieldError createFieldError(String objectName, String path, String... errorMessageCodes) {
+    private FieldError createFieldError(String objectName, String path, String... errorMessageCodes) {
         return new FieldError(objectName,
                 path,
                 null,
