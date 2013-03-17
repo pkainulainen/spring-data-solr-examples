@@ -47,7 +47,7 @@ public class ITAuthenticationTest {
     }
 
     @Test
-    public void loginWithCorrectCredentials() throws Exception {
+    public void login_CorrectCredentials_ShouldReturnStatusOk() throws Exception {
         mockMvc.perform(post("/api/login")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param(IntegrationTestUtil.REQUEST_PARAMETER_USERNAME, IntegrationTestUtil.CORRECT_USERNAME)
@@ -57,7 +57,7 @@ public class ITAuthenticationTest {
     }
 
     @Test
-    public void loginWithIncorrectCredentials() throws Exception {
+    public void login_IncorrectCredentials_ShouldReturnStatusUnauthorized() throws Exception {
         mockMvc.perform(post("/api/login")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param(IntegrationTestUtil.REQUEST_PARAMETER_USERNAME, IntegrationTestUtil.INCORRECT_USERNAME)
@@ -67,7 +67,7 @@ public class ITAuthenticationTest {
     }
 
     @Test
-    public void loginByUsingIncorrectRequestMethod() throws Exception {
+    public void login_IncorrectRequestMethod_ShouldReturnStatusUnauthorized() throws Exception {
         mockMvc.perform(get("/api/login")
                 .param(IntegrationTestUtil.REQUEST_PARAMETER_USERNAME, IntegrationTestUtil.CORRECT_USERNAME)
                 .param(IntegrationTestUtil.REQUEST_PARAMETER_PASSWORD, IntegrationTestUtil.CORRECT_PASSWORD)
@@ -76,7 +76,7 @@ public class ITAuthenticationTest {
     }
 
     @Test
-    public void logout() throws Exception {
+    public void logout_ShouldReturnStatusOk() throws Exception {
         mockMvc.perform(get("/api/logout")
                 .with(userDetailsService(IntegrationTestUtil.CORRECT_USERNAME))
         )

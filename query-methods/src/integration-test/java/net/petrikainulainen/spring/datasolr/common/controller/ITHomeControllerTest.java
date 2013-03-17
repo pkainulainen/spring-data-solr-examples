@@ -45,7 +45,7 @@ public class ITHomeControllerTest {
     }
 
     @Test
-    public void showHomePage() throws Exception {
+    public void showHomePage_ShouldReturnHomeView() throws Exception {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name(HomeController.HOME_VIEW))

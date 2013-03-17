@@ -46,14 +46,14 @@ public class ITUserControllerTest {
     }
 
     @Test
-    public void getLoggedInUserAsAnonymous() throws Exception {
+    public void getLoggedInUser_AsAnonymous_ShouldReturnStatusOkAndEmptyString() throws Exception {
         mockMvc.perform(get("/api/user"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(""));
     }
 
     @Test
-    public void getLoggedInUserAsUser() throws Exception {
+    public void getLoggedInUser_AsUser_ShouldReturnStatusOkAndUser() throws Exception {
         mockMvc.perform(get("/api/user")
             .with(userDetailsService(IntegrationTestUtil.CORRECT_USERNAME))
         )
