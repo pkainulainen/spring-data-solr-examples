@@ -44,6 +44,7 @@ public class TodoDocumentRepositoryImplTest {
 
         ArgumentCaptor<PartialUpdate> partialUpdateArgument = ArgumentCaptor.forClass(PartialUpdate.class);
         verify(solrTemplateMock, times(1)).saveBean(partialUpdateArgument.capture());
+        verify(solrTemplateMock, times(1)).commit();
 
         PartialUpdate update = partialUpdateArgument.getValue();
 
@@ -51,7 +52,7 @@ public class TodoDocumentRepositoryImplTest {
 
         List<UpdateField> updatedFields = update.getUpdates();
         assertEquals(2, updatedFields.size());
-        
+
         for (UpdateField updatedField: updatedFields) {
             String fieldName = updatedField.getName();
             if (fieldName.equals(TodoDocument.FIELD_DESCRIPTION)) {

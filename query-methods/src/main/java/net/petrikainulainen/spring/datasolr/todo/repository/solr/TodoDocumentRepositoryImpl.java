@@ -31,5 +31,6 @@ public class TodoDocumentRepositoryImpl implements PartialUpdateRepository {
         update.add(TodoDocument.FIELD_TITLE, todoEntry.getTitle());
 
         solrTemplate.saveBean(update);
+        solrTemplate.commit();
     }
 }
