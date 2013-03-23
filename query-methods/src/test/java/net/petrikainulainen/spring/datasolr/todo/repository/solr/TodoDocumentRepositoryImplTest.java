@@ -50,6 +50,8 @@ public class TodoDocumentRepositoryImplTest {
         assertEquals(todoEntry.getId().toString(), update.getIdField().getValue());
 
         List<UpdateField> updatedFields = update.getUpdates();
+        assertEquals(2, updatedFields.size());
+        
         for (UpdateField updatedField: updatedFields) {
             String fieldName = updatedField.getName();
             if (fieldName.equals(TodoDocument.FIELD_DESCRIPTION)) {
