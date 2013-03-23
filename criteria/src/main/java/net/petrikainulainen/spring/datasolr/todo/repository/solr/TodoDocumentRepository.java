@@ -1,10 +1,7 @@
 package net.petrikainulainen.spring.datasolr.todo.repository.solr;
 
 import net.petrikainulainen.spring.datasolr.todo.document.TodoDocument;
-import org.springframework.data.solr.repository.Query;
 import org.springframework.data.solr.repository.SolrCrudRepository;
-
-import java.util.List;
 
 /**
  * @author Petri Kainulainen
