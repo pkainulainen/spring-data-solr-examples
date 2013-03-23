@@ -1,0 +1,27 @@
+This is an example application of my blog post:
+
+- Spring Data Solr Tutorial: Dynamic Queries (TBD)
+
+You might want to also read the following blog posts:
+
+- Spring Data Solr Tutorial: Configuration - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-configuration/
+- Spring Data Solr Tutorial: CRUD (Almost) - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-crud-almost/
+- Spring Data Solr Tutorial: Query Methods - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-query-methods/
+- Spring Data Solr Tutorial: Adding Custom Methods to a Single Repository - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-adding-custom-methods-to-a-single-repository/
+
+RUNNING THE APPLICATION:
+
+- Download and install Maven 3 (http://maven.apache.org/download.html#Installation). If you have already installed Maven 3, you can skip this step.
+- If you don't already have a local Solr installation, you have create one. You might want to read this
+  blog entry: http://www.petrikainulainen.net/programming/maven/running-solr-with-maven/
+- Configure the value of the solr.solr.home property found from the profile specific properties files (application.properties).
+- Go the root directory of project (The one which contains the pom.xml file)
+- Run command mvn clean jetty:run
+- Start your browser and go to the location: http://localhost:8080
+- Use credentials (user/password) to log in.
+
+RUNNING TESTS:
+
+- You can run unit tests by using this command: mvn test -P dev
+- You can run integration tests by using a command: mvn verify -P integration-test
+

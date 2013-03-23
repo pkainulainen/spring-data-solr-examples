@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Bean definitions for the test profile -->
+    <beans profile="test">
+        <bean id="todoDocumentRepository" name="todoDocumentRepository" class="org.mockito.Mockito" factory-method="mock">
+            <constructor-arg value="net.petrikainulainen.spring.datasolr.todo.repository.solr.TodoDocumentRepository"/>
+        </bean>
+    </beans>
+</beans>
