@@ -7,6 +7,7 @@ import net.petrikainulainen.spring.datasolr.todo.repository.solr.TodoDocumentRep
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
@@ -65,12 +66,16 @@ public class RepositoryTodoIndexServiceTest {
         ReflectionTestUtils.setField(service, "queryMethodType", RepositoryTodoIndexService.QUERY_METHOD_METHOD_NAME);
 
         List<TodoDocument> expected = new ArrayList<TodoDocument>();
-        when(repositoryMock.findByTitleContainsOrDescriptionContains(SEARCH_TERM, SEARCH_TERM)).thenReturn(expected);
+        when(repositoryMock.findByTitleContainsOrDescriptionContains(eq(SEARCH_TERM), eq(SEARCH_TERM), any(Sort.class))).thenReturn(expected);
 
         List<TodoDocument> actual = service.search(SEARCH_TERM);
 
-        verify(repositoryMock, times(1)).findByTitleContainsOrDescriptionContains(SEARCH_TERM, SEARCH_TERM);
+        ArgumentCaptor<Sort> sortArgument = ArgumentCaptor.forClass(Sort.class);
+        verify(repositoryMock, times(1)).findByTitleContainsOrDescriptionContains(eq(SEARCH_TERM), eq(SEARCH_TERM), sortArgument.capture());
         verifyNoMoreInteractions(repositoryMock);
+
+        Sort sort = sortArgument.getValue();
+        assertEquals(Sort.Direction.DESC,  sort.getOrderFor("id").getDirection());
 
         assertEquals(expected, actual);
     }

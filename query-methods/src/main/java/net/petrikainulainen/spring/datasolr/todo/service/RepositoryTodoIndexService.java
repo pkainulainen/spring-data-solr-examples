@@ -6,6 +6,7 @@ import net.petrikainulainen.spring.datasolr.todo.repository.solr.TodoDocumentRep
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,7 +69,8 @@ public class RepositoryTodoIndexService implements TodoIndexService {
         if (queryMethodType != null) {
             if (queryMethodType.equals(QUERY_METHOD_METHOD_NAME)) {
                 LOGGER.debug("Finding todo entries by using query generation from method name.");
-                return repository.findByTitleContainsOrDescriptionContains(searchTerm, searchTerm);
+                Sort sort = sortByIdDesc();
+                return repository.findByTitleContainsOrDescriptionContains(searchTerm, searchTerm, sort);
             }
             else if (queryMethodType.equals(QUERY_METHOD_NAMED_QUERY)) {
                 LOGGER.debug("Finding todo entries by using named queries.");
@@ -82,5 +84,9 @@ public class RepositoryTodoIndexService implements TodoIndexService {
 
         LOGGER.debug("Unknown query method type: {}. Returning empty list.", queryMethodType);
         return new ArrayList<TodoDocument>();
+    }
+
+    private Sort sortByIdDesc() {
+        return new Sort(Sort.Direction.DESC, "id");
     }
 }
