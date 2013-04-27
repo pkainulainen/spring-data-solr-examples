@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.*;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -57,6 +58,10 @@ public class TodoDocumentRepositoryImplTest {
         verifyNoMoreInteractions(solrTemplateMock);
 
         SimpleQuery executedQuery = queryArgument.getValue();
+
+        Sort sort = executedQuery.getSort();
+        assertEquals(Sort.Direction.DESC, sort.getOrderFor(TodoDocument.FIELD_ID).getDirection());
+
         Criteria executedCriteria = executedQuery.getCriteria();
 
         List<Criteria> criteriaChain = executedCriteria.getCriteriaChain();
@@ -91,6 +96,9 @@ public class TodoDocumentRepositoryImplTest {
 
         SimpleQuery executedQuery = queryArgument.getValue();
         Criteria executedCriteria = executedQuery.getCriteria();
+
+        Sort sort = executedQuery.getSort();
+        assertEquals(Sort.Direction.DESC, sort.getOrderFor(TodoDocument.FIELD_ID).getDirection());
 
         List<Criteria> criteriaChain = executedCriteria.getCriteriaChain();
         assertEquals(4, criteriaChain.size());
