@@ -69,16 +69,15 @@ public class RepositoryTodoIndexService implements TodoIndexService {
         if (queryMethodType != null) {
             if (queryMethodType.equals(QUERY_METHOD_METHOD_NAME)) {
                 LOGGER.debug("Finding todo entries by using query generation from method name.");
-                Sort sort = sortByIdDesc();
-                return repository.findByTitleContainsOrDescriptionContains(searchTerm, searchTerm, sort);
+                return repository.findByTitleContainsOrDescriptionContains(searchTerm, searchTerm, sortByIdDesc());
             }
             else if (queryMethodType.equals(QUERY_METHOD_NAMED_QUERY)) {
                 LOGGER.debug("Finding todo entries by using named queries.");
-                return repository.findByNamedQuery(searchTerm);
+                return repository.findByNamedQuery(searchTerm, sortByIdDesc());
             }
             else if (queryMethodType.equals(QUERY_METHOD_QUERY_ANNOTATION)) {
                 LOGGER.debug("Finding todo entries by using @Query annotation.");
-                return repository.findByQueryAnnotation(searchTerm);
+                return repository.findByQueryAnnotation(searchTerm, sortByIdDesc());
             }
         }
 
@@ -87,6 +86,6 @@ public class RepositoryTodoIndexService implements TodoIndexService {
     }
 
     private Sort sortByIdDesc() {
-        return new Sort(Sort.Direction.DESC, "id");
+        return new Sort(Sort.Direction.DESC, TodoDocument.FIELD_ID);
     }
 }

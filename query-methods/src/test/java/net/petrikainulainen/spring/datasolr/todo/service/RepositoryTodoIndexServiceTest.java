@@ -75,7 +75,7 @@ public class RepositoryTodoIndexServiceTest {
         verifyNoMoreInteractions(repositoryMock);
 
         Sort sort = sortArgument.getValue();
-        assertEquals(Sort.Direction.DESC,  sort.getOrderFor("id").getDirection());
+        assertEquals(Sort.Direction.DESC,  sort.getOrderFor(TodoDocument.FIELD_ID).getDirection());
 
         assertEquals(expected, actual);
     }
@@ -85,12 +85,16 @@ public class RepositoryTodoIndexServiceTest {
         ReflectionTestUtils.setField(service, "queryMethodType", RepositoryTodoIndexService.QUERY_METHOD_NAMED_QUERY);
 
         List<TodoDocument> expected = new ArrayList<TodoDocument>();
-        when(repositoryMock.findByNamedQuery(SEARCH_TERM)).thenReturn(expected);
+        when(repositoryMock.findByNamedQuery(eq(SEARCH_TERM), any(Sort.class))).thenReturn(expected);
 
         List<TodoDocument> actual = service.search(SEARCH_TERM);
 
-        verify(repositoryMock, times(1)).findByNamedQuery(SEARCH_TERM);
+        ArgumentCaptor<Sort> sortArgument = ArgumentCaptor.forClass(Sort.class);
+        verify(repositoryMock, times(1)).findByNamedQuery(eq(SEARCH_TERM), sortArgument.capture());
         verifyNoMoreInteractions(repositoryMock);
+
+        Sort sort = sortArgument.getValue();
+        assertEquals(Sort.Direction.DESC, sort.getOrderFor(TodoDocument.FIELD_ID).getDirection());
 
         assertEquals(expected, actual);
     }
@@ -100,12 +104,16 @@ public class RepositoryTodoIndexServiceTest {
         ReflectionTestUtils.setField(service, "queryMethodType", RepositoryTodoIndexService.QUERY_METHOD_QUERY_ANNOTATION);
 
         List<TodoDocument> expected = new ArrayList<TodoDocument>();
-        when(repositoryMock.findByQueryAnnotation(SEARCH_TERM)).thenReturn(expected);
+        when(repositoryMock.findByQueryAnnotation(eq(SEARCH_TERM), any(Sort.class))).thenReturn(expected);
 
         List<TodoDocument> actual = service.search(SEARCH_TERM);
 
-        verify(repositoryMock, times(1)).findByQueryAnnotation(SEARCH_TERM);
+        ArgumentCaptor<Sort> sortArgument = ArgumentCaptor.forClass(Sort.class);
+        verify(repositoryMock, times(1)).findByQueryAnnotation(eq(SEARCH_TERM), sortArgument.capture());
         verifyNoMoreInteractions(repositoryMock);
+
+        Sort sort = sortArgument.getValue();
+        assertEquals(Sort.Direction.DESC, sort.getOrderFor(TodoDocument.FIELD_ID).getDirection());
 
         assertEquals(expected, actual);
     }
