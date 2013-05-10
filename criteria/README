@@ -15,9 +15,11 @@ RUNNING THE APPLICATION:
 - Download and install Maven 3 (http://maven.apache.org/download.html#Installation). If you have already installed Maven 3, you can skip this step.
 - If you don't already have a local Solr installation, you have create one. You might want to read this
   blog entry: http://www.petrikainulainen.net/programming/maven/running-solr-with-maven/
-- Configure the value of the solr.solr.home property found from the profile specific properties files (application.properties).
 - Go the root directory of project (The one which contains the pom.xml file)
-- Run command mvn clean jetty:run
+- If you want to use the embedded Solr server, run command mvn clean jetty:run (Remember to set the value of
+  solr.solr.home property found from the profiles/dev/config.properties file).
+- If you want to use the HTTP Solr server, run command mvn clean jetty:run -P prod (Remember to set the value of
+  solr.server.url property found from the profiles/prod/config.properties file).
 - Start your browser and go to the location: http://localhost:8080
 - Use credentials (user/password) to log in.
 
