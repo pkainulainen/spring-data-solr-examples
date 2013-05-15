@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/example.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/bootstrap-responsive.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/simplePagination.css"/>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/vendor/jquery-1.8.2.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/vendor/spin.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/vendor/bootstrap.js"></script>
@@ -21,6 +22,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/vendor/Backbone.ModelBinder.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/vendor/handlebars-1.0.rc.1.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/vendor/backbone.marionette.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/vendor/jquery.simplePagination.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/app/app.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/app/todo/todo.events.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/app/todo/todo.controller.js"></script>
