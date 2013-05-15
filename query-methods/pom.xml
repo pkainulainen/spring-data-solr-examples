@@ -17,7 +17,6 @@
     </licenses>
 
     <!-- Spring Milestone / RC repository needed by Spring Data Solr -->
-
     <repositories>
         <repository>
             <id>spring-milestone</id>
