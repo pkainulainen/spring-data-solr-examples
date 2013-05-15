@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:solr="http://www.springframework.org/schema/data/solr"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/data/solr http://www.springframework.org/schema/data/solr/spring-solr.xsd">
+
+    <context:property-placeholder location="classpath:application.properties" ignore-resource-not-found="false"/>
+
+    <!-- Enable Solr repositories and configure repository base package -->
+    <solr:repositories base-package="net.petrikainulainen.spring.datasolr.todo.repository.solr"/>
+
+    <!-- Bean definitions for the dev profile -->
+    <beans profile="dev">
+        <!-- Configures embedded Solr server -->
+        <solr:embedded-solr-server id="solrServer" solrHome="${solr.solr.home}"/>
+
+        <!-- Configures Solr template -->
+        <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
+            <constructor-arg index="0" ref="solrServer"/>
+        </bean>
+    </beans>
+
+    <!-- Bean definitions for the prod profile -->
+    <beans profile="prod">
+        <!-- Configures HTTP Solr server -->
+        <solr:solr-server id="solrServer" url="${solr.server.url}"/>
+
+        <!-- Configures Solr template -->
+        <bean id="solrTemplate" class="org.springframework.data.solr.core.SolrTemplate">
+            <constructor-arg index="0" ref="solrServer"/>
+        </bean>
+    </beans>
+</beans>
