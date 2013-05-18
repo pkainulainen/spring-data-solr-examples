@@ -39,6 +39,12 @@ TodoApp.Translations = {};
 TodoApp.Vents = {};
 TodoApp.Views = {};
 
+TodoApp.Pagination = {
+    order: 1, //1 means descending and -1 ascending order
+    pageSize: 2,
+    sortProperty: "id"
+}
+
 TodoApp.spinner = new Spinner({
     lines: 13, // The number of lines to draw
     length: 30, // The length of each line
