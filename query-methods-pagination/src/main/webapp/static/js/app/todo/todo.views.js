@@ -173,10 +173,10 @@ TodoApp.Views.SearchResultView = Marionette.CompositeView.extend({
         this.collection = new TodoApp.Collections.TodoSearchResults();
         this.collection.searchTerm = this.options.searchTerm;
 
-        var that = this;
+        var self = this;
         $.getJSON("/api/todo/search/count/" + this.options.searchTerm, function(results){
             window.log("found results: ", results);
-            that.collection.searchResultCount = results;
+            self.collection.searchResultCount = results;
 
             $(".todo-list-pagination").pagination({
                 items: results,
@@ -184,7 +184,7 @@ TodoApp.Views.SearchResultView = Marionette.CompositeView.extend({
                 cssStyle: 'light-theme',
                 onPageClick: function(page, event) {
                     event.preventDefault();
-                    that.collection.getPage(page);
+                    self.collection.getPage(page);
                 }
             })
         });
