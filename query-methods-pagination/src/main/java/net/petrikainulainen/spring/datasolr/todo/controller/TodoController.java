@@ -60,6 +60,13 @@ public class TodoController {
        return createDTO(added);
     }
 
+    @RequestMapping(value = "/api/todo/search/count/{searchTerm}", method = RequestMethod.GET)
+    @ResponseBody
+    public long countSearchResults(@PathVariable("searchTerm") String searchTerm) {
+        LOGGER.debug("Finding search result count for search term: {}", searchTerm);
+        return service.countSearchResults(searchTerm);
+    }
+
     @RequestMapping(value = "/api/todo/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public TodoDTO deleteById(@PathVariable("id") Long id) throws TodoNotFoundException {

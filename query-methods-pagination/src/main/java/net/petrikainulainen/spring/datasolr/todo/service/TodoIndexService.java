@@ -13,6 +13,8 @@ public interface TodoIndexService {
 
     public void addToIndex(Todo todoEntry);
 
+    public long countSearchResults(String searchTerm);
+
     public void deleteFromIndex(Long id);
 
     public List<TodoDocument> search(String searchTerm, Pageable page);

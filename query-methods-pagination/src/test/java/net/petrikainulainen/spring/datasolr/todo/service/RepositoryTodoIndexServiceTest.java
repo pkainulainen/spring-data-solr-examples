@@ -55,6 +55,18 @@ public class RepositoryTodoIndexServiceTest {
     }
 
     @Test
+    public void countSearchResults_ShouldReturnResultCount() {
+        when(repositoryMock.count(SEARCH_TERM)).thenReturn(2L);
+
+        long actual = service.countSearchResults(SEARCH_TERM);
+
+        verify(repositoryMock, times(1)).count(SEARCH_TERM);
+        verifyNoMoreInteractions(repositoryMock);
+
+        assertEquals(2L, actual);
+    }
+
+    @Test
     public void deleteFromIndex_ShouldDeleteDocumentFromIndex() {
         service.deleteFromIndex(1L);
 

@@ -5,7 +5,9 @@ import net.petrikainulainen.spring.datasolr.todo.model.Todo;
 /**
  * @author Petri Kainulainen
  */
-public interface PartialUpdateRepository {
+public interface CustomTodoRepository {
+
+    public long count(String searchTerm);
 
     public void update(Todo todoEntry);
 }

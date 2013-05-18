@@ -52,6 +52,7 @@ public class TodoControllerTest {
 
     private static final String OBJECT_NAME = "todo";
 
+    private static final long RESULT_COUNT = 2L;
     private static final String SEARCH_TERM = "Foo";
 
     private TodoController controller;
@@ -115,6 +116,19 @@ public class TodoControllerTest {
         controller.add(dto);
 
         verifyZeroInteractions(localeHolderWrapperMock, messageSourceMock, serviceMock);
+    }
+
+    @Test
+    public void countSearchResults_ShouldReturnSearchResultCount() {
+        when(serviceMock.countSearchResults(SEARCH_TERM)).thenReturn(RESULT_COUNT);
+
+        long actual = controller.countSearchResults(SEARCH_TERM);
+
+        verify(serviceMock, times(1)).countSearchResults(SEARCH_TERM);
+        verifyNoMoreInteractions(serviceMock);
+        verifyZeroInteractions(localeHolderWrapperMock, messageSourceMock);
+
+        assertEquals(RESULT_COUNT, actual);
     }
 
     @Test

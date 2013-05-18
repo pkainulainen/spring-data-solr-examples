@@ -21,6 +21,13 @@ public interface TodoService {
     public Todo add(TodoDTO added);
 
     /**
+     * Finds the search result count for the given search term.
+     * @param searchTerm    The search term
+     * @return  The search result count
+     */
+    public long countSearchResults(String searchTerm);
+
+    /**
      * Deletes a to-do entry.
      * @param id    The id of the deleted to-do entry.
      * @return  The deleted to-do entry.

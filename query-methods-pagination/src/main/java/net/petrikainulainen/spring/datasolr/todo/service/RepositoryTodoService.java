@@ -45,6 +45,13 @@ public class RepositoryTodoService implements TodoService {
         return persisted;
     }
 
+    @PreAuthorize("hasPermission('Todo', 'search')")
+    @Override
+    public long countSearchResults(String searchTerm) {
+        LOGGER.debug("Getting search result count for search term: {}", searchTerm);
+        return indexService.countSearchResults(searchTerm);
+    }
+
     @PreAuthorize("hasPermission('Todo', 'delete')")
     @Transactional(rollbackFor = {TodoNotFoundException.class})
     @Override

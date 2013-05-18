@@ -25,6 +25,7 @@ import static org.mockito.Mockito.*;
  */
 public class RepositoryTodoServiceTest {
 
+    private static final long RESULT_COUNT = 1L;
     private static final String SEARCH_TERM = "Foo";
 
     private RepositoryTodoService service;
@@ -65,6 +66,19 @@ public class RepositoryTodoServiceTest {
         assertNull(model.getId());
         assertEquals(dto.getDescription(), model.getDescription());
         assertEquals(dto.getTitle(), model.getTitle());
+    }
+
+    @Test
+    public void countSearchResults_ShouldReturnSearchResultCount() {
+        when(indexServiceMock.countSearchResults(SEARCH_TERM)).thenReturn(RESULT_COUNT);
+
+        long actual = service.countSearchResults(SEARCH_TERM);
+
+        verify(indexServiceMock, times(1)).countSearchResults(SEARCH_TERM);
+        verifyNoMoreInteractions(indexServiceMock);
+        verifyZeroInteractions(repositoryMock);
+
+        assertEquals(RESULT_COUNT, actual);
     }
 
     @Test
