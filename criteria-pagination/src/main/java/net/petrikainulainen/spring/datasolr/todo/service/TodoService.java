@@ -4,6 +4,7 @@ import net.petrikainulainen.spring.datasolr.todo.document.TodoDocument;
 import net.petrikainulainen.spring.datasolr.todo.dto.TodoDTO;
 import net.petrikainulainen.spring.datasolr.todo.exception.TodoNotFoundException;
 import net.petrikainulainen.spring.datasolr.todo.model.Todo;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -54,5 +55,5 @@ public interface TodoService {
      * @param searchTerm
      * @return The list of todo entries. If matching todo entries are not found, the method returns an empty list.
      */
-    public List<TodoDocument> search(String searchTerm);
+    public List<TodoDocument> search(String searchTerm, Pageable page);
 }

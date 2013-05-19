@@ -5,6 +5,7 @@ import net.petrikainulainen.spring.datasolr.todo.model.Todo;
 import net.petrikainulainen.spring.datasolr.todo.repository.solr.TodoDocumentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,9 +45,9 @@ public class RepositoryTodoIndexService implements TodoIndexService {
     }
 
     @Override
-    public List<TodoDocument> search(String searchTerm) {
-        LOGGER.debug("Searching documents with search term: {}", searchTerm);
-        return repository.search(searchTerm);
+    public List<TodoDocument> search(String searchTerm, Pageable page) {
+        LOGGER.debug("Searching documents with search term: {} and page: {}", searchTerm, page);
+        return repository.search(searchTerm, page);
     }
 
     @Transactional

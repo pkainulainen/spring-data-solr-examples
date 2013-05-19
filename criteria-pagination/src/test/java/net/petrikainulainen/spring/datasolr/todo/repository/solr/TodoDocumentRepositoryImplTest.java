@@ -6,9 +6,7 @@ import net.petrikainulainen.spring.datasolr.todo.model.Todo;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.*;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -51,7 +49,8 @@ public class TodoDocumentRepositoryImplTest {
         Page expectedPage = new PageImpl(expected);
         when(solrTemplateMock.queryForPage(any(Query.class), eq(TodoDocument.class))).thenReturn(expectedPage);
 
-        List<TodoDocument> actual = repository.search(SEARCH_TERM_SINGLE_WORD);
+        Pageable pageSpec = new PageRequest(0, 10);
+        List<TodoDocument> actual = repository.search(SEARCH_TERM_SINGLE_WORD, pageSpec);
 
         ArgumentCaptor<SimpleQuery> queryArgument = ArgumentCaptor.forClass(SimpleQuery.class);
         verify(solrTemplateMock, times(1)).queryForPage(queryArgument.capture(), eq(TodoDocument.class));
@@ -59,8 +58,8 @@ public class TodoDocumentRepositoryImplTest {
 
         SimpleQuery executedQuery = queryArgument.getValue();
 
-        Sort sort = executedQuery.getSort();
-        assertEquals(Sort.Direction.DESC, sort.getOrderFor(TodoDocument.FIELD_ID).getDirection());
+        Pageable actualPageSpec = executedQuery.getPageRequest();
+        assertEquals(pageSpec, actualPageSpec);
 
         Criteria executedCriteria = executedQuery.getCriteria();
 
@@ -88,7 +87,8 @@ public class TodoDocumentRepositoryImplTest {
         Page expectedPage = new PageImpl(expected);
         when(solrTemplateMock.queryForPage(any(Query.class), eq(TodoDocument.class))).thenReturn(expectedPage);
 
-        List<TodoDocument> actual = repository.search(SEARCH_TERM_TWO_WORDS);
+        Pageable pageSpec = new PageRequest(0, 10);
+        List<TodoDocument> actual = repository.search(SEARCH_TERM_TWO_WORDS, pageSpec);
 
         ArgumentCaptor<SimpleQuery> queryArgument = ArgumentCaptor.forClass(SimpleQuery.class);
         verify(solrTemplateMock, times(1)).queryForPage(queryArgument.capture(), eq(TodoDocument.class));
@@ -97,8 +97,8 @@ public class TodoDocumentRepositoryImplTest {
         SimpleQuery executedQuery = queryArgument.getValue();
         Criteria executedCriteria = executedQuery.getCriteria();
 
-        Sort sort = executedQuery.getSort();
-        assertEquals(Sort.Direction.DESC, sort.getOrderFor(TodoDocument.FIELD_ID).getDirection());
+        Pageable actualPageSpec = executedQuery.getPageRequest();
+        assertEquals(pageSpec, actualPageSpec);
 
         List<Criteria> criteriaChain = executedCriteria.getCriteriaChain();
         assertEquals(4, criteriaChain.size());

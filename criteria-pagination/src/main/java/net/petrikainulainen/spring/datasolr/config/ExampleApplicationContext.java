@@ -6,13 +6,18 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.web.PageableArgumentResolver;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.mvc.method.annotation.ServletWebArgumentResolverAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+
+import java.util.List;
 
 /**
  * @author Petri Kainulainen
@@ -35,6 +40,12 @@ public class ExampleApplicationContext extends WebMvcConfigurerAdapter {
 
     private static final String VIEW_RESOLVER_PREFIX = "/WEB-INF/jsp/";
     private static final String VIEW_RESOLVER_SUFFIX = ".jsp";
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        PageableArgumentResolver pageableArgumentResolver = new PageableArgumentResolver();
+        argumentResolvers.add(new ServletWebArgumentResolverAdapter(pageableArgumentResolver));
+    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

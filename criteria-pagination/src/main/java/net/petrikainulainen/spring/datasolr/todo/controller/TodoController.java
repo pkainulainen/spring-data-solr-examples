@@ -11,6 +11,7 @@ import net.petrikainulainen.spring.datasolr.todo.service.TodoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -177,10 +178,10 @@ public class TodoController {
 
     @RequestMapping(value = "/api/todo/search/{searchTerm}", method = RequestMethod.GET)
     @ResponseBody
-    public List<TodoDTO> search(@PathVariable("searchTerm") String searchTerm) {
+    public List<TodoDTO> search(@PathVariable("searchTerm") String searchTerm, Pageable page) {
         LOGGER.debug("Search todo entries with search term: {}", searchTerm);
 
-        List<TodoDocument> todoEntries = service.search(searchTerm);
+        List<TodoDocument> todoEntries = service.search(searchTerm, page);
         LOGGER.debug("Found {} todo entries", todoEntries.size());
 
         return createSearchResultDTOs(todoEntries);

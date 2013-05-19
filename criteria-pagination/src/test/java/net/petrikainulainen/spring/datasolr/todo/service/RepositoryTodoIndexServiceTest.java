@@ -7,6 +7,8 @@ import net.petrikainulainen.spring.datasolr.todo.repository.solr.TodoDocumentRep
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
@@ -63,11 +65,12 @@ public class RepositoryTodoIndexServiceTest {
     @Test
     public void search_ShouldReturnDocuments() {
         List<TodoDocument> expected = new ArrayList<TodoDocument>();
-        when(repositoryMock.search(SEARCH_TERM)).thenReturn(expected);
+        when(repositoryMock.search(eq(SEARCH_TERM), any(Pageable.class))).thenReturn(expected);
 
-        List<TodoDocument> actual = service.search(SEARCH_TERM);
+        Pageable page = new PageRequest(0, 10);
+        List<TodoDocument> actual = service.search(SEARCH_TERM, page);
 
-        verify(repositoryMock, times(1)).search(SEARCH_TERM);
+        verify(repositoryMock, times(1)).search(SEARCH_TERM, page);
         verifyNoMoreInteractions(repositoryMock);
 
         assertEquals(expected, actual);

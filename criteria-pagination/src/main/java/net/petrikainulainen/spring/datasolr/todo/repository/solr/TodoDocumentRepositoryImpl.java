@@ -5,6 +5,7 @@ import net.petrikainulainen.spring.datasolr.todo.model.Todo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.core.query.Criteria;
@@ -28,14 +29,14 @@ public class TodoDocumentRepositoryImpl implements CustomTodoDocumentRepository 
     private SolrTemplate solrTemplate;
 
     @Override
-    public List<TodoDocument> search(String searchTerm) {
+    public List<TodoDocument> search(String searchTerm, Pageable page) {
         LOGGER.debug("Building a criteria query with search term: {}", searchTerm);
 
         String[] words = searchTerm.split(" ");
 
         Criteria conditions = createSearchConditions(words);
         SimpleQuery search = new SimpleQuery(conditions);
-        search.addSort(sortByIdDesc());
+        search.setPageRequest(page);
 
         Page results = solrTemplate.queryForPage(search, TodoDocument.class);
         return results.getContent();
@@ -56,10 +57,6 @@ public class TodoDocumentRepositoryImpl implements CustomTodoDocumentRepository 
         }
 
         return conditions;
-    }
-
-    private Sort sortByIdDesc() {
-        return new Sort(Sort.Direction.DESC, TodoDocument.FIELD_ID);
     }
 
     @Override

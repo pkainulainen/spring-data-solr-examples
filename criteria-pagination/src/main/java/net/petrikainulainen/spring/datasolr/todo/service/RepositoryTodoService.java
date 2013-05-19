@@ -7,6 +7,7 @@ import net.petrikainulainen.spring.datasolr.todo.model.Todo;
 import net.petrikainulainen.spring.datasolr.todo.repository.jpa.TodoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -101,8 +102,8 @@ public class RepositoryTodoService implements TodoService {
 
     @PreAuthorize("hasPermission('Todo', 'search')")
     @Override
-    public List<TodoDocument> search(String searchTerm) {
+    public List<TodoDocument> search(String searchTerm, Pageable page) {
         LOGGER.debug("Search todo entries with search term: {}", searchTerm);
-        return indexService.search(searchTerm);
+        return indexService.search(searchTerm, page);
     }
 }

@@ -15,6 +15,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.MessageSource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -229,11 +231,12 @@ public class TodoControllerTest {
         TodoDocument document = TodoTestUtil.createDocument(TodoTestUtil.ID, TodoTestUtil.DESCRIPTION, TodoTestUtil.TITLE);
         List<TodoDocument> documents = createDocuments(document);
 
-        when(serviceMock.search(SEARCH_TERM)).thenReturn(documents);
+        when(serviceMock.search(eq(SEARCH_TERM), any(Pageable.class))).thenReturn(documents);
 
-        List<TodoDTO> results = controller.search(SEARCH_TERM);
+        Pageable page = new PageRequest(0, 10);
+        List<TodoDTO> results = controller.search(SEARCH_TERM, page);
 
-        verify(serviceMock, times(1)).search(SEARCH_TERM);
+        verify(serviceMock, times(1)).search(SEARCH_TERM, page);
         verifyNoMoreInteractions(serviceMock);
 
         assertEquals(documents.size(), results.size());

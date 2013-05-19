@@ -13,7 +13,11 @@
     <import resource="exampleApplicationContext-security.xml"/>
     <import resource="exampleApplicationContext-solr.xml"/>
 
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <bean id="pageagleArgumentResolver" class="org.springframework.data.web.PageableArgumentResolver"/>
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
 
     <mvc:resources mapping="/static/**" location="/static/"/>
     <mvc:default-servlet-handler/>

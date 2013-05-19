@@ -2,6 +2,7 @@ package net.petrikainulainen.spring.datasolr.todo.service;
 
 import net.petrikainulainen.spring.datasolr.todo.document.TodoDocument;
 import net.petrikainulainen.spring.datasolr.todo.model.Todo;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface TodoIndexService {
 
     public void deleteFromIndex(Long id);
 
-    public List<TodoDocument> search(String searchTerm);
+    public List<TodoDocument> search(String searchTerm, Pageable page);
 
     public void update(Todo todoEntry);
 }
