@@ -1,14 +1,6 @@
-This is an example application of the following blog posts:
+This is an example application of my blog post:
 
-- Spring Data Solr Tutorial: Dynamic Queries - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-dynamic-queries/
-- Spring Data Solr Tutorial: Sorting (Not published yet)
-
-You might want to also read the following blog posts:
-
-- Spring Data Solr Tutorial: Configuration - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-configuration/
-- Spring Data Solr Tutorial: CRUD (Almost) - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-crud-almost/
-- Spring Data Solr Tutorial: Query Methods - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-query-methods/
-- Spring Data Solr Tutorial: Adding Custom Methods to a Single Repository - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-adding-custom-methods-to-a-single-repository/
+- Spring Data Solr Tutorial: Pagination - (Not published yet)
 
 RUNNING THE APPLICATION:
 
