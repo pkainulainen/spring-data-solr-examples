@@ -5,7 +5,7 @@ import net.petrikainulainen.spring.datasolr.todo.model.Todo;
 /**
  * @author Petri Kainulainen
  */
-public interface CustomTodoRepository {
+public interface CustomTodoDocumentRepository {
 
     public long count(String searchTerm);
 

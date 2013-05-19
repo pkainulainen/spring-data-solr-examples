@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @author Petri Kainulainen
  */
 @Repository
-public class TodoDocumentRepositoryImpl implements CustomTodoRepository {
+public class TodoDocumentRepositoryImpl implements CustomTodoDocumentRepository {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TodoDocumentRepositoryImpl.class);
 

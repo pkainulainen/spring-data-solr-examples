@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author Petri Kainulainen
  */
-public interface TodoDocumentRepository extends CustomTodoRepository, SolrCrudRepository<TodoDocument, String> {
+public interface TodoDocumentRepository extends CustomTodoDocumentRepository, SolrCrudRepository<TodoDocument, String> {
 
     public List<TodoDocument> findByTitleContainsOrDescriptionContains(String title, String description, Pageable page);
 
