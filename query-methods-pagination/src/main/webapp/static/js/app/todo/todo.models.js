@@ -32,12 +32,3 @@ TodoApp.Collections.TodoSearchResults = Backbone.PageableCollection.extend({
         order: "page.sort.dir"
     }
 })
-
-
-/*Backbone.Collection.extend({
-    model: TodoApp.Models.Todo,
-
-    url: function() {
-        return "/api/todo/search/" + this.searchTerm;
-    }
-})*/
