@@ -37,6 +37,12 @@ public class RepositoryTodoIndexService implements TodoIndexService {
         repository.save(document);
     }
 
+    @Override
+    public long countSearchResults(String searchTerm) {
+        LOGGER.debug("Getting search result count for search term: {}", searchTerm);
+        return repository.count(searchTerm);
+    }
+
     @Transactional
     @Override
     public void deleteFromIndex(Long id) {

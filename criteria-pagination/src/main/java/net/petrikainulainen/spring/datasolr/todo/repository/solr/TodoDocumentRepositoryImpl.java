@@ -29,8 +29,19 @@ public class TodoDocumentRepositoryImpl implements CustomTodoDocumentRepository 
     private SolrTemplate solrTemplate;
 
     @Override
+    public long count(String searchTerm) {
+        LOGGER.debug("Finding count for search term: {}", searchTerm);
+
+        String[] words = searchTerm.split(" ");
+        Criteria conditions = createSearchConditions(words);
+        SimpleQuery countQuery = new SimpleQuery(conditions);
+
+        return solrTemplate.count(countQuery);
+    }
+
+    @Override
     public List<TodoDocument> search(String searchTerm, Pageable page) {
-        LOGGER.debug("Building a criteria query with search term: {}", searchTerm);
+        LOGGER.debug("Building a criteria query with search term: {} and page: {}", searchTerm, page);
 
         String[] words = searchTerm.split(" ");
 

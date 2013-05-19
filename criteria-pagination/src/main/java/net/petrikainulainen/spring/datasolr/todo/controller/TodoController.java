@@ -60,6 +60,13 @@ public class TodoController {
        return createDTO(added);
     }
 
+    @RequestMapping(value = "/api/todo/search/count/{searchTerm}", method = RequestMethod.GET)
+    @ResponseBody
+    public long countSearchResults(@PathVariable("searchTerm") String searchTerm) {
+        LOGGER.debug("Finding search result count for search term: {}", searchTerm);
+        return service.countSearchResults(searchTerm);
+    }
+
     @RequestMapping(value = "/api/todo/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public TodoDTO deleteById(@PathVariable("id") Long id) throws TodoNotFoundException {
@@ -179,7 +186,7 @@ public class TodoController {
     @RequestMapping(value = "/api/todo/search/{searchTerm}", method = RequestMethod.GET)
     @ResponseBody
     public List<TodoDTO> search(@PathVariable("searchTerm") String searchTerm, Pageable page) {
-        LOGGER.debug("Search todo entries with search term: {}", searchTerm);
+        LOGGER.debug("Search todo entries with search term: {} and page: {}", searchTerm, page);
 
         List<TodoDocument> todoEntries = service.search(searchTerm, page);
         LOGGER.debug("Found {} todo entries", todoEntries.size());

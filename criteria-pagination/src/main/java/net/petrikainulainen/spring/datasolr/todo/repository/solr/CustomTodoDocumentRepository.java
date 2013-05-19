@@ -11,6 +11,8 @@ import java.util.List;
  */
 public interface CustomTodoDocumentRepository {
 
+    public long count(String searchTerm);
+
     public List<TodoDocument> search(String searchTerm, Pageable page);
 
     public void update(Todo todoEntry);
