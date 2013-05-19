@@ -186,7 +186,7 @@ public class TodoController {
     @RequestMapping(value = "/api/todo/search/{searchTerm}", method = RequestMethod.GET)
     @ResponseBody
     public List<TodoDTO> search(@PathVariable("searchTerm") String searchTerm, Pageable page) {
-        LOGGER.debug("Search todo entries with search term: {}", searchTerm);
+        LOGGER.debug("Search todo entries with search term: {} and page: {}", searchTerm, page);
 
         List<TodoDocument> todoEntries = service.search(searchTerm, page);
         LOGGER.debug("Found {} todo entries", todoEntries.size());

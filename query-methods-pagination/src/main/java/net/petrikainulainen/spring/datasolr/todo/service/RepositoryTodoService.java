@@ -110,7 +110,7 @@ public class RepositoryTodoService implements TodoService {
     @PreAuthorize("hasPermission('Todo', 'search')")
     @Override
     public List<TodoDocument> search(String searchTerm, Pageable page) {
-        LOGGER.debug("Search todo entries with search term: {}", searchTerm);
+        LOGGER.debug("Search todo entries with search term: {} and page: {}", searchTerm, page);
         return indexService.search(searchTerm, page);
     }
 }

@@ -48,7 +48,7 @@ public class TodoDocumentRepositoryImplTest {
     }
 
     @Test
-    public void search_SingleWord_ShouldCreateConditionAndReturnSearchResultCount() {
+    public void count_SingleWord_ShouldCreateConditionAndReturnSearchResultCount() {
         when(solrTemplateMock.count(any(Query.class))).thenReturn(RESULT_COUNT);
 
         long actual = repository.count(SEARCH_TERM_SINGLE_WORD);
@@ -79,7 +79,7 @@ public class TodoDocumentRepositoryImplTest {
     }
 
     @Test
-    public void search_MultipleWords_ShouldCreateConditionAndReturnDocuments() {
+    public void count_MultipleWords_ShouldCreateConditionAndReturnDocuments() {
         when(solrTemplateMock.count(any(Query.class))).thenReturn(RESULT_COUNT);
 
         long actual = repository.count(SEARCH_TERM_TWO_WORDS);

@@ -46,7 +46,6 @@ public class RepositoryTodoIndexService implements TodoIndexService {
         repository.save(document);
     }
 
-    @Transactional
     @Override
     public long countSearchResults(String searchTerm) {
         LOGGER.debug("Getting search result count for search term: {}", searchTerm);
@@ -62,7 +61,7 @@ public class RepositoryTodoIndexService implements TodoIndexService {
 
     @Override
     public List<TodoDocument> search(String searchTerm, Pageable page) {
-        LOGGER.debug("Searching documents with search term: {}", searchTerm);
+        LOGGER.debug("Searching documents with search term: {} and page: {}", searchTerm, page);
         return findDocuments(searchTerm, page);
     }
 
