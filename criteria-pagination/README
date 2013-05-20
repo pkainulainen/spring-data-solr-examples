@@ -1,6 +1,6 @@
 This is an example application of my blog post:
 
-- Spring Data Solr Tutorial: Pagination - (Not published yet)
+- Spring Data Solr Tutorial: Pagination - http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-pagination/
 
 RUNNING THE APPLICATION:
 
@@ -14,6 +14,9 @@ RUNNING THE APPLICATION:
   solr.server.url property found from the profiles/prod/config.properties file).
 - Start your browser and go to the location: http://localhost:8080
 - Use credentials (user/password) to log in.
+
+You can change the number of todo entries shown on a single page by modifying the js/app/app.js file (search
+for TodoApp.Pagination)
 
 RUNNING TESTS:
 
