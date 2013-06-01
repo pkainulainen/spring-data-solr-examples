@@ -17,7 +17,7 @@
         </license>
     </licenses>
 
-    <!-- Spring Milestone / RC repository needed by Spring Data Solr -->
+    <!-- Spring snapshot repository needed by Spring Data Solr build snapshot -->
     <repositories>
         <repository>
             <id>spring-snapshots</id>

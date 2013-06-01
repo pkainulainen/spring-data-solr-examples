@@ -27,14 +27,14 @@ public class CustomSolrRepositoryFactoryBean extends SolrRepositoryFactoryBean {
             this.solrOperations = solrOperations;
         }
 
-        @SuppressWarnings("unchecked")
+        @Override
         protected Object getTargetRepository(RepositoryMetadata metadata) {
             return new CustomBaseRepositoryImpl<T, ID>(solrOperations, (Class<T>) metadata.getDomainType());
         }
 
+        @Override
         protected Class<?> getRepositoryBaseClass(RepositoryMetadata metadata) {
             return CustomBaseRepository.class;
         }
-
     }
 }

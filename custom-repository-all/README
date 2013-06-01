@@ -1,6 +1,8 @@
 This is an example application of my blog post:
 
-- Spring Data Solr Tutorial: Adding Custom Methods to All Repositories - Not published yet
+- Spring Data Solr Tutorial: Adding Custom Methods to All Repositories:
+http://www.petrikainulainen.net/programming/solr/spring-data-solr-tutorial-adding-custom-methods-to-all-repositories/
+
 RUNNING THE APPLICATION:
 
 - Download and install Maven 3 (http://maven.apache.org/download.html#Installation). If you have already installed Maven 3, you can skip this step.

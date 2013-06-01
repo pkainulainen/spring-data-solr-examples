@@ -9,7 +9,8 @@
     <context:property-placeholder location="classpath:application.properties" ignore-resource-not-found="false"/>
 
     <!-- Enable Solr repositories and configure repository base package -->
-    <solr:repositories base-package="net.petrikainulainen.spring.datasolr.todo.repository.solr"/>
+    <solr:repositories base-package="net.petrikainulainen.spring.datasolr.todo.repository.solr"
+                       factory-class="net.petrikainulainen.spring.datasolr.todo.repository.solr.CustomSolrRepositoryFactoryBean"/>
 
     <!-- Bean definitions for the dev profile -->
     <beans profile="dev">
